@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import Layout from "./components/layout/Layout";
+import Home from "./pages/home/Home";
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const apiUrl = "https://app.asana.com/api/1.0/";
+  // const apiKey = import.meta.env.VITE_PRIVATE_KEY;
+  // const gidKey = import.meta.env.VITE_GID_KEY;
+
+  // const options = {
+  //   method: "POST",
+  //   headers: {
+  //     accept: "application/json",
+  //     "content-type": "application/json",
+  //     authorization:
+  //       "Bearer 1/1205465561564329:afc2ee5641ca2eecaf89c6b5ad721de0",
+  //   },
+  //   // body: JSON.stringify({ data: { name: "Bug Task" } }),
+  // };
+
+  // fetch(
+  //   "https://app.asana.com/api/1.0/tasks?project=1205465631047325",
+  //   options
+  // )
+  //   .then((response) => response.json())
+  //   .then((response) => console.log(response))
+  //   .catch((err) => console.error(err));
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <Layout>
+        <Home />
+      </Layout>
+    </div>
+  );
 }
 
-export default App
+export default App;

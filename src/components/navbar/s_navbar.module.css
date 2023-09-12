@@ -1,0 +1,28 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--bg-col);
+    padding: 1rem;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.menu-section {
+    display: flex;
+    flex: 1;
+    justify-content: end;
+    align-items: center;
+}
+
+p {
+    margin-left: .5rem;
+    font-weight: 500;
+}
