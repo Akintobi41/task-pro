@@ -22,7 +22,13 @@
     align-items: center;
 }
 
-p {
+.nav-items {
     margin-left: .5rem;
+    padding-bottom: 1rem;
     font-weight: 500;
+    text-decoration: none;
+}
+
+.nav-items:hover {
+    text-decoration: underline;
 }

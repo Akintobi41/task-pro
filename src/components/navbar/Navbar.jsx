@@ -1,4 +1,5 @@
 import s from "./s_navbar.module.css";
+import { Link } from "react-router-dom";
 const Navbar = () => {
   const navList = ["Home", "Create"];
   return (
@@ -14,7 +15,15 @@ const Navbar = () => {
       <section className={s["menu-section"]}>
         {" "}
         {navList.map((item) => {
-          return <p key={item}>{item}</p>;
+          return (
+            <Link
+              to={`/${item === "Home" ? "" : item}`}
+              key={item}
+              className={s["nav-items"]}
+            >
+              {item}
+            </Link>
+          );
         })}
       </section>
     </nav>
