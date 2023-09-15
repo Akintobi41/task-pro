@@ -1,7 +1,7 @@
 import s from "./s_navbar.module.css";
 import { Link } from "react-router-dom";
 const Navbar = () => {
-  const navList = ["Home", "Create"];
+  const navList = ["Home", "Create", "Notes"];
   return (
     <nav className={s.nav}>
       <section className={s["logo-section"]}>
@@ -10,7 +10,7 @@ const Navbar = () => {
           alt="completed successfully"
           className={s.logo}
         />
-        <h2>TaskPlc</h2>
+        <h3>TaskPlc</h3>
       </section>
       <section className={s["menu-section"]}>
         {" "}

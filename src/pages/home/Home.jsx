@@ -1,19 +1,39 @@
 import s from "./s_home.module.css";
 import Loader from "../../components/preloader/Loader";
 import useFetch from "../../useFetch";
+import { Link } from "react-router-dom";
+import { date } from "./u_home";
 
 const Home = () => {
-  const { data, loading } = useFetch();
-  console.log(data);
-  const date = (a) => {
-    return new Date(
-      a.slice(0, a.length - 5)
-    ).toDateString();
-  };
+  const url =
+    "https://app.asana.com/api/1.0/tasks?limit=50&project=1205465631047325&opt_fields=completed,created_at,due_on,followers,hearted,projects.name,modified_at,followers,name,notes";
+  const { data, loading, error, status } = useFetch(
+    url,
+    "GET"
+  );
 
   return (
     <section className={s.home}>
       {loading && <Loader loading={loading} />}
+      {error && (
+        <p className={s["error"]}>Failed to fetch</p>
+      )}
+      {status && (
+        <section className={s["create-new"]}>
+          {" "}
+          <p className={s["create-new-text"]}>
+            No tasks created yet, ready to personalize ?
+            <Link
+              to="/create"
+              className={s["create-new-link"]}
+            >
+              {" "}
+              Let{`'`}s get started
+            </Link>
+          </p>
+        </section>
+      )}
+
       <section className={s["task-wrapper"]}>
         {data.map((task) => {
           return (

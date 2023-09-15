@@ -17,16 +17,17 @@
 
 .menu-section {
     display: flex;
-    flex: 1;
+    flex: .5;
     justify-content: end;
     align-items: center;
 }
 
 .nav-items {
+    color: var(--extras);
     margin-left: .5rem;
-    padding-bottom: 1rem;
     font-weight: 500;
     text-decoration: none;
+    font-size: .8rem;
 }
 
 .nav-items:hover {
