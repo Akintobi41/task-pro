@@ -1,0 +1,11 @@
+.task-details {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.delete-btn {
+    position: relative;
+    top: -22px;
+    left: 200px;
+}

@@ -4,14 +4,14 @@ const Navbar = () => {
   const navList = ["Home", "Create", "Notes"];
   return (
     <nav className={s.nav}>
-      <section className={s["logo-section"]}>
+      <Link to={"/"} className={s["logo-section"]}>
         <img
           src="/Images/success.png"
           alt="completed successfully"
           className={s.logo}
         />
         <h3>TaskPlc</h3>
-      </section>
+      </Link>
       <section className={s["menu-section"]}>
         {" "}
         {navList.map((item) => {

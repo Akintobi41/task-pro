@@ -1,10 +1,10 @@
 import s from "./s_home.module.css";
 import Loader from "../../components/preloader/Loader";
 import useFetch from "../../useFetch";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { date } from "./u_home";
 
-const Home = () => {
+const Home = ({ home_url }) => {
   const url =
     "https://app.asana.com/api/1.0/tasks?limit=50&project=1205465631047325&opt_fields=completed,created_at,due_on,followers,hearted,projects.name,modified_at,followers,name,notes";
   const { data, loading, error, status } = useFetch(
@@ -35,9 +35,10 @@ const Home = () => {
       )}
 
       <section className={s["task-wrapper"]}>
-        {data.map((task) => {
+        {data.map((task, i) => {
           return (
-            <section
+            <Link
+              to={`${data[i].gid}`}
               className={s.task}
               key={task.gid}
               style={{
@@ -45,7 +46,7 @@ const Home = () => {
                   task.completed ? "#f4ecdf" : " #e74c3c"
                 }`,
                 color: `${
-                  task.completed ? "#141824;" : "#f4ecdf"
+                  task.completed ? "#141824" : "#f4ecdf"
                 }`,
               }}
             >
@@ -92,7 +93,7 @@ const Home = () => {
                   </p>
                 </section>
               </section>
-            </section>
+            </Link>
           );
         })}
       </section>

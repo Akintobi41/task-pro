@@ -1,0 +1,81 @@
+.create-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+
+}
+
+.title {
+    text-align: center;
+}
+
+.task-name-label {
+    font-size: .7rem;
+    display: flex;
+    justify-content: space-between;
+    margin: .5rem;
+    cursor: pointer;
+}
+
+.form {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+    width: 100%;
+    max-width: 500px;
+}
+
+.input {
+    outline: none;
+    border: solid .1px var(--extras);
+    padding: .2rem;
+    height: 1.5rem;
+    font-size: .65rem;
+    flex: 1;
+    margin-left: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.text-area {
+    resize: none;
+    outline: none;
+    padding: .2rem .4rem;
+    font-size: .7rem;
+    flex: 1;
+    margin-left: 0.5rem;
+}
+
+.radio {
+    height: .5rem;
+}
+
+.radio-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.radio-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-section {
+    display: flex;
+    justify-content: center;
+}
+
+.submit-button {
+    width: 5.5rem;
+    font-size: .6rem;
+    height: 1rem;
+    letter-spacing: .5px;
+    cursor: pointer;
+    margin-top: .5rem;
+}
+
+.disabled {
+    cursor: not-allowed;
+}

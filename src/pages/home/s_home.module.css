@@ -7,6 +7,7 @@
 
 .task-wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     gap: 0.5rem;
     padding: 1rem 0.5rem;
@@ -19,6 +20,7 @@
     padding: 0.5rem;
     border: solid 1px var(--sec-col);
     width: clamp(10rem, 80%, 15rem);
+    text-decoration: none;
 }
 
 .title {
@@ -104,4 +106,11 @@
     color: var(--extras);
     font-style: italic;
     font-weight: 500;
+}
+
+.error {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
 }

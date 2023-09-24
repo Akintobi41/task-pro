@@ -6,7 +6,7 @@ const useFetch = (url, method) => {
         [status, setStatus] = useState(),
         [error, setError] = useState(null),
         apiKey = import.meta.env.VITE_PRIVATE_KEY;
-    // const gidKey = import.meta.env.VITE_GID_KEY;
+
 
     useEffect(() => {
         const options = {
@@ -15,12 +15,14 @@ const useFetch = (url, method) => {
                 accept: "application/json",
                 authorization:
                     `Bearer ${apiKey}`,
-            },
-            // body: JSON.stringify({ data: { name: "Bug Task" } }),
-        };
+            }
+        }
+
+
+
 
         setTimeout(() => {
-            // Fetch and process tasks from the server.
+            // Process tasks from the server.
             fetch(
                 url,
                 options
@@ -46,6 +48,6 @@ const useFetch = (url, method) => {
     },
         [apiKey, method, url])
 
-    return { data, loading, error, status }
+    return { data, loading, error, status };
 }
 export default useFetch
