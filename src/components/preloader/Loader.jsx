@@ -1,10 +1,10 @@
 import s from "./s_loader.module.css";
-const Loader = ({ loading }) => {
+const Loader = ({ loading, toggle }) => {
   return (
-    <section className={`${loading ? s.show : s.hide}`}>
+    <section className={`${loading ? s.hide : s.show}`}>
       {" "}
       <div className={s["lds-ellipsis"]}>
-        <div></div>
+        <div className={`${toggle ? s.dark : ""}`}></div>
         <div></div>
         <div></div>
         <div></div>

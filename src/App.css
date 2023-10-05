@@ -1,11 +1,9 @@
 :root {
-  --pry-col: #FFE7CC;
-  --bg-col: #ECF9FF;
-  --sec-col: #FFE7CC;
+  --pry-col: #ffe7cc;
+  --bg-col: #ecf9ff;
+  --sec-col: #ffe7cc;
   --extras: #141824;
   --bg-col-2: #c7c8ca2e;
-
-
 }
 
 *,
@@ -21,4 +19,6 @@ body {
   height: 100%;
   font-family: "General Sans", sans-serif;
   background-color: var(--bg-col-2);
+  max-width: 1500px;
+  margin: auto;
 }

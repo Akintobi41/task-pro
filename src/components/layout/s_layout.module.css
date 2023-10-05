@@ -1,6 +1,10 @@
 .layout {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.dark-layout {
+  background-color: #242525;
 }

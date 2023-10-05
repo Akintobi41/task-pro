@@ -1,28 +1,32 @@
 import s from "./s_create.module.css";
 import { formDetails } from "./form_details";
-const FormDetails = ({
-  form,
-  disabled,
-  handleChange,
-  myref,
-}) => {
+const FormDetails = ({ form, disabled, handleChange, myref, toggle }) => {
   return (
     <form action="" className={s.form} ref={myref}>
       {formDetails.map((label) => (
         <label
-          className={s["task-name-label"]}
+          className={`${
+            label.type === "radio"
+              ? s["task-name-label-radio"]
+              : s["task-name-label"]
+          } ${label.name === "completed" ? s.completed : ""}`}
           key={label.text}
         >
           {" "}
           {label.type === "radio" ? (
             <>
-              {label.text}
-              {`:`}
-              <section>
-                <label
-                  className={s["radio-label"]}
-                  name={label.name}
-                >
+              <p
+                className={`${
+                  label.type === "radio"
+                    ? s["label-text-radio"]
+                    : s["label-text"]
+                }`}
+              >
+                {label.text}
+              </p>
+
+              <section className={s["radio-inputs"]}>
+                <label className={s["radio-label"]} name={label.name}>
                   {" "}
                   {label.select[0]}
                   <input
@@ -53,7 +57,7 @@ const FormDetails = ({
           ) : label.type === "text-area" ? (
             <>
               {" "}
-              {label.text}:
+              <p className={s["label-text"]}>{label.text}:</p>
               <textarea
                 name={label.name}
                 id={label.type}
@@ -66,7 +70,7 @@ const FormDetails = ({
             </>
           ) : (
             <>
-              {label.text}:{" "}
+              <p className={s["label-text"]}> {label.text}:</p>
               <input
                 type={label.type}
                 name={label.name}
@@ -76,9 +80,7 @@ const FormDetails = ({
                 value={form[`${label.name}`]}
                 onChange={(e) => handleChange(e)}
                 autoComplete="on"
-                required={
-                  label.type !== "date" ? true : false
-                }
+                required
                 disabled={disabled}
               />
             </>
@@ -88,12 +90,12 @@ const FormDetails = ({
       <section className={s["button-section"]}>
         {" "}
         <button
-          className={`${s["submit-button"]} ${
-            disabled ? s.disabled : ""
+          className={`${s["submit-button"]} ${disabled ? s.disabled : ""} ${
+            toggle ? s["btn-dark"] : ""
           }`}
           disabled={disabled}
         >
-          {disabled ? "adding task..." : "add task"}
+          {disabled ? "Adding Task..." : "Add Task"}
         </button>{" "}
       </section>
     </form>

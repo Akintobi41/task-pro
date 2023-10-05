@@ -1,116 +1,51 @@
 .home {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding: 1rem;
-}
-
-.task-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 1rem 0.5rem;
-}
-
-.task {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    padding: 0.5rem;
-    border: solid 1px var(--sec-col);
-    width: clamp(10rem, 80%, 15rem);
-    text-decoration: none;
-}
-
-.title {
-    font-size: .7rem;
-    letter-spacing: 1px;
-    border-bottom: solid 1px var(--extras);
-    ;
-    padding-bottom: .3rem;
-    margin-bottom: .5rem;
-}
-
-.task-name {
-    font-size: .9rem;
-    font-weight: bold;
-
-}
-
-.notes {
-    font-size: .65rem;
-    flex: 1;
-}
-
-.task-created {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: .2rem 0;
-}
-
-.calendar {
-    height: 1rem;
-}
-
-.date-created,
-.followers-length {
-    margin-left: .3rem;
-    font-size: .5rem;
-}
-
-.date-section {
-    display: flex;
-    align-items: center;
-}
-
-.followers-section {
-    display: flex;
-    align-items: center;
-}
-
-.followers-img {
-    height: 1rem;
-}
-
-.modified_at,
-.due_on {
-    font-size: .5rem;
-    margin: .15rem 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1rem;
 }
 
 .create-new {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
 }
 
 .create-new-link {
-    text-decoration: none;
-    display: block;
-    transform: scale(.8);
-    color: var(--extras);
-    margin-top: .1rem;
+  text-decoration: none;
+  display: block;
+  transform: scale(0.8);
+  color: var(--extras);
+  margin-top: 0.1rem;
 }
 
 .create-new-link:hover {
-    text-decoration: underline;
-    transform: scale(.9);
+  text-decoration: underline;
+  transform: scale(0.9);
 }
 
 .create-new-text {
-    text-align: center;
-    font-size: .8rem;
-    color: var(--extras);
-    font-style: italic;
-    font-weight: 500;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--extras);
+  font-style: italic;
+  font-weight: 500;
 }
 
 .error {
-    flex: 1;
-    display: flex;
-    justify-content: center;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
 
+.error-dark {
+  color: #f2f2f2;
+}
+
+.toggle-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
 }

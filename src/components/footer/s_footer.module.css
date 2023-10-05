@@ -1,0 +1,20 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0 0;
+}
+
+.button {
+  padding: 0.2rem 0.8rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+.footer-text {
+  margin-left: 0.5rem;
+  /* color: #121212; */
+}
+
+.footer-text-dark {
+  color: #fff;
+}

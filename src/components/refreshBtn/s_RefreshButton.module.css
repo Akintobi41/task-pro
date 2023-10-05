@@ -1,0 +1,18 @@
+.refresh {
+  width: 0.8rem;
+}
+
+.refresh-button {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  width: 4rem;
+  margin-left: 0.5rem;
+  background: transparent;
+  border: none;
+  text-align: left;
+}
+
+.dark {
+  color: #f2f2f2;
+}
