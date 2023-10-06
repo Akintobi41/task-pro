@@ -12,9 +12,8 @@
 
 .footer-text {
   margin-left: 0.5rem;
-  /* color: #121212; */
 }
 
 .footer-text-dark {
-  color: #fff;
+  color: var(--white);
 }

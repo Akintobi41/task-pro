@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import s from "./s_home.module.css";
 import Loader from "../../components/preloader/Loader";
-import useFetch from "../../useFetch";
+import useFetch from "/src/utils/useFetch.js";
 import { Link } from "react-router-dom";
 import TaskList from "../../components/task-list/TaskList";
 import { useState } from "react";
@@ -9,13 +10,17 @@ import Filter from "../../components/filter/Filter";
 import RefreshButton from "../../components/refreshBtn/RefreshButton";
 const Home = ({ home_url, toggle, setToggle }) => {
   const url = `${home_url}?limit=50&project=1205465631047325&opt_fields=completed,created_at,due_on,followers,hearted,projects.name,modified_at,followers,name,notes`;
-  const { data, loading, error, status, setData } = useFetch(url, "GET");
+  const { data, loading, error, status, setData, fetchData } = useFetch(
+    url,
+    "GET",
+  );
   const [grid, setGrid] = useState(false);
+  console.log(loading);
 
   return (
     <>
       <section className={s.home}>
-        {loading && (
+        {!loading && (
           <Loader loading={loading} toggle={toggle} setToggle={setToggle} />
         )}
         {error && (
@@ -43,7 +48,7 @@ const Home = ({ home_url, toggle, setToggle }) => {
         ) : (
           false
         )}
-        <RefreshButton toggle={toggle} />
+        <RefreshButton toggle={toggle} fetchData={fetchData} />
         <TaskList
           loading={loading}
           status={status}

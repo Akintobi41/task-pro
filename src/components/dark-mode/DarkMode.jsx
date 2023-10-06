@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import s from "./s_DarkMode.module.css";
 const DarkMode = ({ toggle, setToggle }) => {
   return (

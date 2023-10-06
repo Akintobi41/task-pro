@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
+import s from "./s_Filter.module.css";
 const Filter = ({ data, setData }) => {
   const [list, setList] = useState([]);
   const newVal = JSON.parse(localStorage.getItem("selected"));
@@ -43,7 +44,11 @@ const Filter = ({ data, setData }) => {
 
   return (
     <>
-      <select value={value} onChange={(e) => sortOrFilter(e)}>
+      <select
+        value={value}
+        onChange={(e) => sortOrFilter(e)}
+        className={s.select}
+      >
         {option.map((option) => (
           <option key={option} value={option}>
             {option}

@@ -1,11 +1,12 @@
-import s from "./s_taskList.module.css";
+/* eslint-disable react/prop-types */
+import s from "./s_TaskList.module.css";
 import { Link } from "react-router-dom";
 import { date } from "/src/pages/home/u_home.js";
 import { setBg, setCol, shrinkName, shrinkNote } from "./utils";
-import usePagination from "../../usePagination";
+import usePagination from "/src/utils/usePagination.js";
 import Footer from "../../components/footer/Footer";
 
-const TaskList = ({ data, setData, status, grid, toggle }) => {
+const TaskList = ({ data, status, grid, toggle }) => {
   const { handleNext, handlePrevious, currentItems, endIndex } =
     usePagination(data);
   return (

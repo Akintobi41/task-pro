@@ -1,11 +1,12 @@
-import { useParams } from "react-router-dom";
-import useFetch from "../../useFetch";
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
+import { useParams, useNavigate } from "react-router-dom";
 import s from "./s_taskdetails.module.css";
 import { formDetails } from "../create/form_details";
 import { useEffect, useRef, useState } from "react";
-import { options, postToApi } from "../../usePostToApi";
-import { useNavigate } from "react-router-dom";
+import { deleteOptions, postToApi } from "/src/utils/usePostToApi.js";
 import Loader from "../../components/preloader/Loader";
+import { options } from "../../utils/options";
 
 const TaskDetails = ({
   home_url,
@@ -17,21 +18,24 @@ const TaskDetails = ({
   const el = useRef();
   const [tracker, setTracker] = useState(false);
   const [deleted, setDeleted] = useState(false);
-
-  const { id } = useParams(),
-    { data, loading } = useFetch(`${home_url}${id}`, "GET"),
-    [form, setForm] = useState({
-      name: "",
-      completed: "",
-      due_date: "",
-      liked: "",
-      notes: "",
-      start_date: "",
-    }),
-    ref = useRef(),
-    [disabled, setDisabled] = useState();
+  const { id } = useParams();
+  const [data, setData] = useState([]);
+  // const { data, loading } = useFetch(`${home_url}${id}`, "GET");
+  const [form, setForm] = useState({
+    name: "",
+    completed: "",
+    due_date: "",
+    liked: "",
+    notes: "",
+    start_date: "",
+  });
+  const ref = useRef();
+  const [disabled, setDisabled] = useState();
+  const [loading, isLoading] = useState(false);
   useEffect(() => {
+    console.log(loading);
     const handleSubmit = (e) => {
+      //Update form details
       setDisabled(true);
       e.preventDefault();
       const formData = new FormData(e.target);
@@ -39,9 +43,11 @@ const TaskDetails = ({
       // Merge properties from Form Json into the form object
       setForm({ ...form, ...formJson });
       setTracker(true);
+      console.log(formJson);
     };
+    console.log(form);
 
-    if (!loading) {
+    if (loading) {
       const element = ref.current;
       element.addEventListener("submit", handleSubmit);
       return () => element.removeEventListener("submit", handleSubmit);
@@ -49,6 +55,7 @@ const TaskDetails = ({
   }, [el, form, loading]);
 
   useEffect(() => {
+    // Update Task
     if (tracker) {
       fetch(`${home_url}${id}`, postToApi("PUT", form)).then((res) => {
         if (!res.ok)
@@ -60,10 +67,31 @@ const TaskDetails = ({
     }
     setTracker(false);
   }, [form, home_url, id, tracker, Navigate]);
+  useEffect(() => {
+    fetch(`${home_url}${id}`, options)
+      .then((res) => {
+        // Check if the response is OK; otherwise, throw an error
+        if (!res.ok)
+          throw Error(
+            "No tasks available at the moment. Please try again later...",
+          );
+        return res.json();
+      })
+      .then((res) => {
+        isLoading(true);
+        setData(res.data);
+        // setError(false);
+      })
+      .catch((error) => {
+        isLoading(true);
+        console.error(error.message);
+      });
+  }, []);
 
   //Delete Task
   const handleDelete = () => {
-    fetch(`${home_url}${id}`, options).then((res) => {
+    setDeleted(true);
+    fetch(`${home_url}${id}`, deleteOptions).then((res) => {
       if (!res.ok)
         throw Error(
           "unable to delete task at the moment, please try again later",
@@ -72,22 +100,24 @@ const TaskDetails = ({
       Navigate("/");
     });
   };
+  console.log(data);
+
   return (
     <section
       className={`${s["task-details"]} ${toggle ? s["task-details-dark"] : ""}`}
     >
       <header>
         <h4>Task Progress Hub</h4>
-        {!loading && (
+        {loading && (
           <p className={s["task-gid"]}>
             Task {id.slice(0, 4)}...
             {id.slice(id.length - 5, id.length)}
           </p>
         )}
       </header>
-      {loading && <Loader loading={loading} />}
+      {!loading && <Loader loading={loading} />}
 
-      {!loading && (
+      {loading && (
         <section className={s["form-container"]}>
           <form action="" ref={ref} className={s.form}>
             {formDetails.map((label) => (

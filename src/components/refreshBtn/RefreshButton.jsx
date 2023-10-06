@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import s from "./s_RefreshButton.module.css";
-function RefreshButton({ onClick, toggle }) {
+function RefreshButton({ toggle, fetchData }) {
   return (
     <button
-      onClick={onClick}
+      onClick={fetchData}
       className={`${s["refresh-button"]} ${toggle ? s["dark"] : ""}`}
     >
       Refresh

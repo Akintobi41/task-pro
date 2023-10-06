@@ -2,9 +2,8 @@
 export const gridType = (grid, toggle, s) => [
   {
     id: 1,
-    class: `${s.views} ${grid ? s["v-list"] : ""} ${
-      toggle && grid ? s.dark : ""
-    }`,
+    class: `${s.views} ${grid ? s["v-list"] : ""} ${toggle && grid ? s.dark : ""
+      }`,
     value: true,
     src1: "/public/Images/icons8-grid-50 white.png",
     alt1: "grid-icon",
@@ -15,9 +14,8 @@ export const gridType = (grid, toggle, s) => [
   },
   {
     id: 2,
-    class: `${s.views} ${grid ? "" : s["v-grid"]} ${s.v} ${
-      toggle && !grid ? s.dark : ""
-    }`,
+    class: `${s.views} ${grid ? "" : s["v-grid"]} ${s.v} ${toggle && !grid ? s.dark : ""
+      }`,
     value: false,
     src1: "/public/Images/icons8-list-white.png",
     alt1: "list-icon",
