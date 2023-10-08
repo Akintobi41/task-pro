@@ -2,7 +2,7 @@ import "./App.css";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/home/Home";
 import Create from "./pages/create/Create";
-import TaskDetails from "./pages/task-details/TaskDetails";
+import TaskDetails from "./pages/taskDetails/TaskDetails";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import DarkMode from "./components/dark-mode/DarkMode";
@@ -14,6 +14,7 @@ function App() {
   const deletedHistory = JSON.parse(localStorage.getItem("history"));
   const [toggle, setToggle] = useState(darkMode);
   const [recentlyDeleted, setRecentlyDeleted] = useState(deletedHistory);
+  const [errorMsg, setErrorMsg] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("mode", JSON.stringify(toggle));
@@ -30,7 +31,17 @@ function App() {
               path="/"
               element={<Home home_url={home_url} toggle={toggle} />}
             />
-            <Route path="/create" element={<Create toggle={toggle} />} />
+            <Route
+              path="/create"
+              element={
+                <Create
+                  toggle={toggle}
+                  home_url={home_url}
+                  errorMsg={errorMsg}
+                  setErrorMsg={setErrorMsg}
+                />
+              }
+            />
             <Route
               path={`/:id`}
               element={
@@ -39,6 +50,8 @@ function App() {
                   toggle={toggle}
                   recentlyDeleted={recentlyDeleted}
                   setRecentlyDeleted={setRecentlyDeleted}
+                  errorMsg={errorMsg}
+                  setErrorMsg={setErrorMsg}
                 />
               }
             />

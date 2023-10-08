@@ -2,19 +2,17 @@
 import { useEffect, useState } from "react";
 import { options } from "./options";
 
-const useFetch = (url, method) => {
+const useFetch = (url) => {
     const newData = JSON.parse(localStorage.getItem("data"));
     const [data, setData] = useState(newData);
+    const [refresh, setRefresh] = useState(false);
     const [loading, isLoading] = useState(false);
     const [status, setStatus] = useState();
     const [error, setError] = useState(null);
-    // const apiKey = import.meta.env.VITE_PRIVATE_KEY;
-
     useEffect(() => {
-        localStorage;
         localStorage.setItem("data", JSON.stringify(data));
+    }, []);
 
-    }, [data]);
 
     useEffect(() => {
         // check localStorage and set State if there is data found in the localStorage
@@ -24,10 +22,14 @@ const useFetch = (url, method) => {
         } else {
             // Process tasks from the server.
             fetchData()
+            console.log(data)
         }
-        // console.log(data);
     }, []);
 
+
+    if (refresh) {
+        localStorage.setItem("data", JSON.stringify(data));
+    }
     function fetchData() {
         setData([])
         isLoading(false)
@@ -43,6 +45,9 @@ const useFetch = (url, method) => {
             .then((res) => {
                 isLoading(true);
                 setData(res.data);
+                console.log('updated')
+                setRefresh(true)
+                console.log(data)
                 setError(false);
                 if (!res.data.length) setStatus(true);
             })
@@ -51,6 +56,7 @@ const useFetch = (url, method) => {
                 setError(err.message);
             });
     }
+
     return { data, loading, error, status, setData, fetchData };
 };
 export default useFetch;

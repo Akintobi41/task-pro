@@ -60,3 +60,7 @@ button {
   margin: 0.25rem;
   font-style: italic;
 }
+
+.blur {
+  filter: blur(3px);
+}

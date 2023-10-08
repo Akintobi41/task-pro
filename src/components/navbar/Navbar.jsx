@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import s from "./s_navbar.module.css";
 import { Link } from "react-router-dom";
-const Navbar = ({ toggle, setToggle }) => {
+const Navbar = ({ toggle }) => {
   const navList = ["Home", "Create", "Deleted"];
   return (
     <nav className={`${s.nav} ${toggle ? s["dark-nav"] : ""}`}>
@@ -10,7 +11,7 @@ const Navbar = ({ toggle, setToggle }) => {
           alt="completed successfully"
           className={s.logo}
         />
-        <h3 className={`${toggle ? s["dark-items"] : ""}`}>TaskPlc</h3>
+        <h3 className={` ${s.h3} ${toggle ? s["dark-items"] : ""}`}>TaskPro</h3>
       </Link>
       <section className={s["menu-section"]}>
         {" "}

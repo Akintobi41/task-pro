@@ -16,6 +16,7 @@
 }
 
 .task-name-label {
+  position: relative;
   font-size: 0.7rem;
   display: flex;
   justify-content: space-between;
@@ -34,13 +35,14 @@
 }
 
 .form {
+  position: relative;
   margin: 1rem 0;
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 500px;
   accent-color: #121211;
-  gap: 0.25rem;
+  gap: 0.3rem;
 }
 
 .input {
@@ -125,4 +127,16 @@
 .radio-inputs {
   display: flex;
   margin-top: 0.5rem;
+}
+
+.date-error {
+  font-size: .51rem;
+  font-style: italic;
+  position: absolute;
+  left: 4.5rem;
+  top: 1.8rem;
+  letter-spacing: 1px;
+  color: red;
+  font-weight: bold;
+  transition: all .3s;
 }

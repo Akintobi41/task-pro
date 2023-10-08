@@ -25,6 +25,8 @@ const usePagination = (items) => {
     const handlePrevious = () => {
       handlePageChange(exactPage - 1);
     };
+
+
     setPaginationData({
       endIndex,
       handleNext,
@@ -34,6 +36,7 @@ const usePagination = (items) => {
       startIndex,
       exactPage,
       totalPages,
+      setExactPage
     });
   }, [items, exactPage]);
 

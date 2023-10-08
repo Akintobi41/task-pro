@@ -3,12 +3,18 @@ import s from "./s_TaskList.module.css";
 import { Link } from "react-router-dom";
 import { date } from "/src/pages/home/u_home.js";
 import { setBg, setCol, shrinkName, shrinkNote } from "./utils";
-import usePagination from "/src/utils/usePagination.js";
 import Footer from "../../components/footer/Footer";
 
-const TaskList = ({ data, status, grid, toggle }) => {
-  const { handleNext, handlePrevious, currentItems, endIndex } =
-    usePagination(data);
+const TaskList = ({
+  data,
+  status,
+  grid,
+  toggle,
+  currentItems,
+  endIndex,
+  handleNext,
+  handlePrevious,
+}) => {
   return (
     <>
       <section
@@ -30,6 +36,12 @@ const TaskList = ({ data, status, grid, toggle }) => {
               }}
             >
               <p className={s.title}>{task.projects[0].name}</p>
+              {task.hearted && (
+                <img
+                  src="/public/Images/icons8-favorite.svg"
+                  className={s.favorites}
+                />
+              )}
               <p className={s["task-name"]}>{shrinkName(task)}</p>{" "}
               <p className={s.notes}>{shrinkNote(task)}</p>
               <h4 className={s.modified_at}>

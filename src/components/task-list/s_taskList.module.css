@@ -15,7 +15,9 @@
   position: relative;
   padding: 0.5rem;
   border: solid 1px var(--sec-col);
+  border-radius: 5px;
   text-decoration: none;
+  overflow: auto;
 }
 
 .title {
@@ -85,4 +87,10 @@
 
 .task-dark {
   border: none;
+}
+
+.favorites {
+  width: .8rem;
+  position: absolute;
+  right: 10px;
 }
