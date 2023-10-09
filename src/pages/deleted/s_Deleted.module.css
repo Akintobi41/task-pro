@@ -7,28 +7,37 @@
 .items {
     border-collapse: collapse;
     width: 100%;
-    margin-top: .5rem;
+    max-width: 800px;
+    margin: 1rem auto;
 }
 
 .items th {
     text-align: left;
-    background-color: #04AA6D;
-    color: white;
+    background-color: var(--bg-col);
+    color: var(--extras);
     width: 200px;
 }
 
+.items-dark th {
+    background-color: var(--dark-background);
+}
+
 .items td {
-    font-size: .7rem;
+    font-size: .65rem;
 }
 
 .items td,
 .items th {
     position: relative;
     border: 1px solid #ddd;
-    padding: 0.5rem;
+    padding: 0.5rem 0.2rem;
 }
 
 .items tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.items tr:nth-child(odd) {
     background-color: #f2f2f2;
 }
 
@@ -47,4 +56,44 @@
 .bin-all {
     top: 10px;
     width: 1.25rem;
+}
+
+.toolTip-container {
+    display: inline-block;
+    width: 5rem;
+}
+
+.tool-tipText {
+    visibility: hidden;
+    width: 3.5rem;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 2px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    font-size: .6rem;
+    font-weight: 400;
+    right: 25px;
+    top: 10px;
+}
+
+.toolTip-container:hover .tool-tipText {
+    visibility: visible;
+}
+
+.dark {
+    color: #fff;
+}
+
+.small {
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+}
+
+.p {
+    font-size: .8rem;
+    margin-top: 2rem;
 }

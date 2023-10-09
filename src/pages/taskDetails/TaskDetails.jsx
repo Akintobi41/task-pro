@@ -44,7 +44,7 @@ const TaskDetails = ({
       e.preventDefault();
       //Update form details
       const checkDate =
-        Date.parse(form["start_date"]) < Date.parse(form["due_date"]);
+        Date.parse(data["start_on"]) < Date.parse(data["due_on"]);
       // Check if start date is greater than due date  before updating task
       if (checkDate) {
         setDisabled(true);
@@ -187,6 +187,7 @@ const TaskDetails = ({
                             defaultChecked={data.completed}
                             value={true}
                             required
+                            disabled={disabled}
                           />
                         </label>{" "}
                         <label className={s["radio-label"]}>
@@ -199,6 +200,7 @@ const TaskDetails = ({
                             defaultChecked={!data.completed}
                             value={false}
                             required
+                            disabled={disabled}
                           />
                         </label>
                       </section>
@@ -233,6 +235,7 @@ const TaskDetails = ({
                         }
                         autoComplete="on"
                         required={label.type !== "date" ? true : false}
+                        disabled={disabled}
                       />
                       {label.name === "start_date" && errorMsg ? (
                         <p className={s["date-error"]}>

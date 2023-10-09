@@ -14,6 +14,8 @@ const TaskList = ({
   endIndex,
   handleNext,
   handlePrevious,
+  totalPages,
+  exactPage,
 }) => {
   return (
     <>
@@ -84,6 +86,8 @@ const TaskList = ({
           handlePrevious={handlePrevious}
           endIndex={endIndex}
           toggle={toggle}
+          totalPages={totalPages}
+          exactPage={exactPage}
         />
       ) : (
         false

@@ -9,21 +9,20 @@ import ChangeView from "../../components/change view/ChangeView";
 import Filter from "../../components/filter/Filter";
 import usePagination from "../../utils/usePagination";
 import RefreshButton from "../../components/refreshBtn/RefreshButton";
-const Home = ({
-  home_url,
-  toggle,
-  setToggle,
-  recentlyDeleted,
-  deletedHistory,
-}) => {
+const Home = ({ home_url, toggle, setToggle }) => {
   const url = `${home_url}?limit=50&project=1205465631047325&opt_fields=completed,created_at,due_on,followers,hearted,projects.name,modified_at,followers,name,notes`;
   const { data, loading, error, status, setData, fetchData } = useFetch(url);
   const [grid, setGrid] = useState(false);
-  const { handleNext, handlePrevious, currentItems, endIndex, setExactPage } =
-    usePagination(data);
+  const {
+    handleNext,
+    totalPages,
+    handlePrevious,
+    currentItems,
+    endIndex,
+    exactPage,
+    setExactPage,
+  } = usePagination(data);
 
-  console.log(recentlyDeleted);
-  console.log(deletedHistory);
   return (
     <>
       <section className={s.home}>
@@ -31,18 +30,6 @@ const Home = ({
           <Loader loading={loading} toggle={toggle} setToggle={setToggle} />
         )}
 
-        {status && (
-          <section className={s["create-new"]}>
-            {" "}
-            <p className={s["create-new-text"]}>
-              No tasks created yet, ready to personalize ?
-              <Link to="/create" className={s["create-new-link"]}>
-                {" "}
-                Let{`'`}s get started
-              </Link>
-            </p>
-          </section>
-        )}
         {data.length ? (
           <section className={s["toggle-section"]}>
             <Filter data={data} setData={setData} setExactPage={setExactPage} />
@@ -51,7 +38,28 @@ const Home = ({
         ) : (
           false
         )}
-        <RefreshButton toggle={toggle} fetchData={fetchData} />
+        {!status && <RefreshButton toggle={toggle} fetchData={fetchData} />}
+        {status && (
+          <section className={s["create-new"]}>
+            {" "}
+            <p
+              className={`${s["create-new-text"]} ${
+                toggle ? s["create-text-dark"] : ""
+              }`}
+            >
+              No tasks created yet, ready to personalize ?
+              <Link
+                to="/create"
+                className={`${s["create-new-link"]} ${
+                  toggle ? s["create-text-dark"] : ""
+                }`}
+              >
+                {" "}
+                Let{`'`}s get started
+              </Link>
+            </p>
+          </section>
+        )}
         {error && (
           <p className={`${s["error"]} ${toggle ? s["error-dark"] : ""}`}>
             Failed to fetch data...
@@ -68,6 +76,8 @@ const Home = ({
           handleNext={handleNext}
           handlePrevious={handlePrevious}
           endIndex={endIndex}
+          totalPages={totalPages}
+          exactPage={exactPage}
         />
       </section>
     </>

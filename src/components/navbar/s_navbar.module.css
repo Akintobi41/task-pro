@@ -39,7 +39,7 @@
 }
 
 .dark-nav {
-  background: #656666;
+  background: var(--dark-background);
 }
 
 .dark-items {

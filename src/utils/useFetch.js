@@ -22,7 +22,6 @@ const useFetch = (url) => {
         } else {
             // Process tasks from the server.
             fetchData()
-            console.log(data)
         }
     }, []);
 
@@ -45,9 +44,7 @@ const useFetch = (url) => {
             .then((res) => {
                 isLoading(true);
                 setData(res.data);
-                console.log('updated')
                 setRefresh(true)
-                console.log(data)
                 setError(false);
                 if (!res.data.length) setStatus(true);
             })

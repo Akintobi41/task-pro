@@ -68,6 +68,7 @@ function App() {
                 <Deleted
                   recentlyDeleted={recentlyDeleted}
                   setRecentlyDeleted={setRecentlyDeleted}
+                  toggle={toggle}
                 />
               }
             />

@@ -38,6 +38,7 @@ const Filter = ({ data, setData, setExactPage }) => {
       Completed: [...list].filter((todo) => todo.completed),
       "Not Completed": [...list].filter((todo) => !todo.completed),
     }[val];
+
     setData(result || list);
     setExactPage(1);
   }

@@ -33,6 +33,10 @@
   font-weight: 500;
 }
 
+.create-text-dark {
+  color: var(--white);
+}
+
 .error {
   flex: 1;
   display: flex;
