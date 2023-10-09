@@ -8,8 +8,6 @@ const ConfirmDelete = ({ btn, setBtn, toggle, cancel, confirmDelete }) => {
     if (val === val1) {
       setBtn(val);
       cancel();
-
-      console.log("renderrr");
     }
     if (val === val2) {
       setBtn(val2);

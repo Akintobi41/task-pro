@@ -9,12 +9,21 @@ import ChangeView from "../../components/change view/ChangeView";
 import Filter from "../../components/filter/Filter";
 import usePagination from "../../utils/usePagination";
 import RefreshButton from "../../components/refreshBtn/RefreshButton";
-const Home = ({ home_url, toggle, setToggle }) => {
+const Home = ({
+  home_url,
+  toggle,
+  setToggle,
+  recentlyDeleted,
+  deletedHistory,
+}) => {
   const url = `${home_url}?limit=50&project=1205465631047325&opt_fields=completed,created_at,due_on,followers,hearted,projects.name,modified_at,followers,name,notes`;
   const { data, loading, error, status, setData, fetchData } = useFetch(url);
   const [grid, setGrid] = useState(false);
   const { handleNext, handlePrevious, currentItems, endIndex, setExactPage } =
     usePagination(data);
+
+  console.log(recentlyDeleted);
+  console.log(deletedHistory);
   return (
     <>
       <section className={s.home}>

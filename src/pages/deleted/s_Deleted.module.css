@@ -1,0 +1,50 @@
+.deleted-section {
+    padding: 1rem;
+    overflow: auto;
+
+}
+
+.items {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: .5rem;
+}
+
+.items th {
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+    width: 200px;
+}
+
+.items td {
+    font-size: .7rem;
+}
+
+.items td,
+.items th {
+    position: relative;
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+}
+
+.items tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.items tr:hover {
+    background-color: #ddd;
+}
+
+.bin,
+.bin-all {
+    position: absolute;
+    width: .8rem;
+    right: 5px;
+    cursor: pointer;
+}
+
+.bin-all {
+    top: 10px;
+    width: 1.25rem;
+}

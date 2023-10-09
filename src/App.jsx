@@ -13,7 +13,7 @@ function App() {
   const darkMode = JSON.parse(localStorage.getItem("mode"));
   const deletedHistory = JSON.parse(localStorage.getItem("history"));
   const [toggle, setToggle] = useState(darkMode);
-  const [recentlyDeleted, setRecentlyDeleted] = useState(deletedHistory);
+  const [recentlyDeleted, setRecentlyDeleted] = useState(deletedHistory || []);
   const [errorMsg, setErrorMsg] = useState(false);
 
   useEffect(() => {
@@ -29,7 +29,14 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={<Home home_url={home_url} toggle={toggle} />}
+              element={
+                <Home
+                  home_url={home_url}
+                  toggle={toggle}
+                  recentlyDeleted={recentlyDeleted}
+                  deletedHistory={deletedHistory}
+                />
+              }
             />
             <Route
               path="/create"
@@ -55,7 +62,15 @@ function App() {
                 />
               }
             />
-            <Route path="/deleted" element={<Deleted />} />
+            <Route
+              path="/deleted"
+              element={
+                <Deleted
+                  recentlyDeleted={recentlyDeleted}
+                  setRecentlyDeleted={setRecentlyDeleted}
+                />
+              }
+            />
           </Routes>
         </Layout>
       </Router>

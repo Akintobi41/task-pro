@@ -116,7 +116,7 @@ const TaskDetails = ({
         throw Error(
           "unable to delete task at the moment, please try again later",
         );
-      setRecentlyDeleted([data]);
+      setRecentlyDeleted([...recentlyDeleted, data]);
       Navigate("/");
     });
   }
