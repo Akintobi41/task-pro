@@ -30,7 +30,7 @@ const Home = ({ home_url, toggle, setToggle }) => {
           <Loader loading={loading} toggle={toggle} setToggle={setToggle} />
         )}
 
-        {data.length ? (
+        {data?.length ? (
           <section className={s["toggle-section"]}>
             <Filter data={data} setData={setData} setExactPage={setExactPage} />
             <ChangeView grid={grid} setGrid={setGrid} toggle={toggle} />

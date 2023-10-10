@@ -131,7 +131,7 @@
 }
 
 .date-error {
-  font-size: .51rem;
+  font-size: 0.51rem;
   font-style: italic;
   position: absolute;
   left: 4.5rem;
@@ -139,5 +139,5 @@
   letter-spacing: 1px;
   color: red;
   font-weight: bold;
-  transition: all .3s;
+  transition: all 0.3s;
 }

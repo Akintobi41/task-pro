@@ -6,42 +6,42 @@ export const postToApi = (...args) => {
 
   return method === "POST"
     ? {
-      method: method,
-      headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-        authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        data: {
-          name: name,
-          completed: completed,
-          due_on: due_date,
-          liked: liked,
-          notes: notes,
-          start_on: start_date,
-          projects: `${[gidKey]}`,
+        method: method,
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+          authorization: `Bearer ${apiKey}`,
         },
-      }),
-    }
+        body: JSON.stringify({
+          data: {
+            name: name,
+            completed: completed,
+            due_on: due_date,
+            liked: liked,
+            notes: notes,
+            start_on: start_date,
+            projects: `${[gidKey]}`,
+          },
+        }),
+      }
     : {
-      method: method,
-      headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-        authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        data: {
-          name: name,
-          completed: completed,
-          due_on: due_date,
-          liked: liked,
-          notes: notes,
-          start_on: start_date,
+        method: method,
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+          authorization: `Bearer ${apiKey}`,
         },
-      }),
-    };
+        body: JSON.stringify({
+          data: {
+            name: name,
+            completed: completed,
+            due_on: due_date,
+            liked: liked,
+            notes: notes,
+            start_on: start_date,
+          },
+        }),
+      };
 };
 
 export const deleteOptions = {

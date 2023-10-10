@@ -30,12 +30,12 @@
   font-weight: 500;
   text-decoration: none;
   font-size: 0.8rem;
-  padding-bottom: .1rem;
+  padding-bottom: 0.1rem;
   transition: border-color 0.2s ease;
 }
 
 .nav-items:hover {
-  border-bottom: solid .8px var(--extras);
+  border-bottom: solid 0.8px var(--extras);
 }
 
 .dark-nav {
@@ -47,7 +47,7 @@
 }
 
 .dark-items:hover {
-  border-bottom: solid .8px var(--white);
+  border-bottom: solid 0.8px var(--white);
 }
 
 .h3:hover {

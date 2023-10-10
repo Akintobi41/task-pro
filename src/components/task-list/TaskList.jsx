@@ -79,7 +79,7 @@ const TaskList = ({
           );
         })}
       </section>
-      {!status && data.length ? (
+      {!status && data?.length ? (
         <Footer
           data={data}
           handleNext={handleNext}
