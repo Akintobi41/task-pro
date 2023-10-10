@@ -215,6 +215,7 @@ const TaskDetails = ({
                         className={label.className}
                         defaultValue={data.notes}
                         required
+                        disabled={disabled}
                       ></textarea>
                     </>
                   ) : (

@@ -9,13 +9,15 @@
   padding: 0.2rem 0.8rem;
   margin-left: 0.5rem;
   cursor: pointer;
+  color: var(--extras);
 }
 
 .footer-text {
   margin-left: 0.5rem;
 }
 
-.footer-text-dark {
+.footer-text-dark,
+.dark {
   color: var(--white);
 }
 

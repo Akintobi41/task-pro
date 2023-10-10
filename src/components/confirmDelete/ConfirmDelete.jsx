@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import s from "./s_ConfirmDelete.module.css";
-const ConfirmDelete = ({ btn, setBtn, toggle, cancel, confirmDelete }) => {
+const ConfirmDelete = ({ setBtn, toggle, cancel, confirmDelete }) => {
   const val1 = "Nevermind",
     val2 = "Delete";
   const checkBtn = (e) => {
