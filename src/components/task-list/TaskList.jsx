@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import s from "./s_TaskList.module.css";
+import s from "./s_task-list.module.css";
 import { Link } from "react-router-dom";
 import { date } from "/src/pages/home/u_home.js";
 import { setBg, setCol, shrinkName, shrinkNote } from "./utils";
@@ -40,7 +40,7 @@ const TaskList = ({
               <p className={s.title}>{task.projects[0].name}</p>
               {task.hearted && (
                 <img
-                  src="/public/Images/icons8-favorite.svg"
+                  src="/Images/icons8-favorite.svg"
                   className={s.favorites}
                 />
               )}
@@ -55,7 +55,7 @@ const TaskList = ({
               <section className={s["task-created"]}>
                 <section className={s["date-section"]}>
                   <img
-                    src="/public/Images/calendar.png"
+                    src="/Images/calendar.png"
                     alt="created_at"
                     className={s.calendar}
                   />{" "}
@@ -66,7 +66,7 @@ const TaskList = ({
                 </section>
                 <section className={s["followers-section"]}>
                   <img
-                    src="/public/Images/user.png"
+                    src="/Images/user.png"
                     alt="followers"
                     className={s["followers-img"]}
                   />

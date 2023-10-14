@@ -28,7 +28,7 @@ const Deleted = ({ recentlyDeleted, setRecentlyDeleted, toggle }) => {
                 Id{" "}
                 <span className={s["toolTip-container"]}>
                   <img
-                    src="/public/Images/icons8-delete-all-50.png"
+                    src="/Images/icons8-delete-all-50.png"
                     alt="delete-all-permanently"
                     className={s["bin-all"]}
                   />
@@ -45,7 +45,7 @@ const Deleted = ({ recentlyDeleted, setRecentlyDeleted, toggle }) => {
                 <td className={s.td}>
                   {item.gid}{" "}
                   <img
-                    src="/public/Images/icons8-bin-50.png"
+                    src="/Images/icons8-bin-50.png"
                     alt="delete-permanently"
                     className={s.bin}
                     onClick={() => clear(item)}

@@ -54,6 +54,7 @@
   flex: 1;
   margin-left: 0.25rem;
   letter-spacing: 1px;
+  background-color: var(--white);
 }
 
 .text-area {
@@ -64,6 +65,7 @@
   flex: 1;
   margin-left: 0.25rem;
   border: solid 0.001px var(--extras);
+  background: var(--white);
 }
 
 .radio {

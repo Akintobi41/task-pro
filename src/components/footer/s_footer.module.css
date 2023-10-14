@@ -10,14 +10,22 @@
   margin-left: 0.5rem;
   cursor: pointer;
   color: var(--extras);
+  outline: none;
+  border: solid 1px rgb(20 24 36 / 10%);
+  border-radius: 5px;
+  background-color: #f5fcff;
 }
 
 .footer-text {
   margin-left: 0.5rem;
 }
 
-.footer-text-dark,
+.footer-text-dark {
+  color: var(--white);
+}
+
 .dark {
+  background-color: #353535;
   color: var(--white);
 }
 

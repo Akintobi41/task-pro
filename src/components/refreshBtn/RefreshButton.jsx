@@ -9,13 +9,13 @@ function RefreshButton({ toggle, fetchData }) {
       Refresh
       {toggle ? (
         <img
-          src="/public/Images/icons8-refresh -light.svg"
+          src="/Images/icons8-refresh -light.svg"
           alt="refresh-button"
           className={s.refresh}
         />
       ) : (
         <img
-          src="/public/Images/icons8-refresh.svg"
+          src="/Images/icons8-refresh.svg"
           alt="refresh-button"
           className={s.refresh}
         />

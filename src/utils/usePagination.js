@@ -6,13 +6,13 @@ const usePagination = (items) => {
 
   useEffect(() => {
     const itemsPerPage = 6;
-    const totalPages = Math.ceil(items.length / itemsPerPage);
+    const totalPages = Math.ceil(items?.length / itemsPerPage);
     const startIndex = (exactPage - 1) * itemsPerPage;
     const endIndex =
-      startIndex + itemsPerPage > items.length
+      startIndex + itemsPerPage > items?.length
         ? items.length
         : startIndex + itemsPerPage;
-    const currentItems = items.slice(startIndex, endIndex);
+    const currentItems = items?.slice(startIndex, endIndex);
 
     const handlePageChange = (newPage) => {
       if (newPage >= 1 && newPage <= totalPages) {

@@ -38,6 +38,10 @@
   border-bottom: solid 0.8px var(--extras);
 }
 
+.nav-items:active {
+  border-bottom: none;
+}
+
 .dark-nav {
   background: var(--dark-background);
 }

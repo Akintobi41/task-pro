@@ -12,8 +12,9 @@
   background: transparent;
   border: none;
   font-style: italic;
+  color: var(--extras);
 }
 
 .dark {
-  color: #f2f2f2;
+  color: var(--white)
 }

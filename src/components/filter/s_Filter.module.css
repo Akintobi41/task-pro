@@ -1,7 +1,4 @@
 select {
-  /* A reset of styles, including removing the default dropdown arrow */
-  /* appearance: ; */
-  /* Additional resets for further consistency */
   background-color: transparent;
   border: none;
   padding: 0 1em 0 0;
@@ -11,6 +8,7 @@ select {
   font-size: 0.8rem;
   cursor: inherit;
   line-height: inherit;
+  color: var(--extras);
 }
 
 select::-ms-expand {
