@@ -9,7 +9,6 @@ import DarkMode from "./components/dark-mode/DarkMode";
 import Deleted from "./pages/deleted/Deleted";
 
 function App() {
-  const home_url = import.meta.env.VITE_APP_BASE_URL;
   const darkMode = JSON.parse(localStorage.getItem("mode"));
   const deletedHistory = JSON.parse(localStorage.getItem("history"));
   const [toggle, setToggle] = useState(darkMode);
@@ -31,7 +30,6 @@ function App() {
               path="/"
               element={
                 <Home
-                  home_url={home_url}
                   toggle={toggle}
                   recentlyDeleted={recentlyDeleted}
                   deletedHistory={deletedHistory}
@@ -43,7 +41,6 @@ function App() {
               element={
                 <Create
                   toggle={toggle}
-                  home_url={home_url}
                   errorMsg={errorMsg}
                   setErrorMsg={setErrorMsg}
                 />
@@ -53,7 +50,6 @@ function App() {
               path={`/:id`}
               element={
                 <TaskDetails
-                  home_url={home_url}
                   toggle={toggle}
                   recentlyDeleted={recentlyDeleted}
                   setRecentlyDeleted={setRecentlyDeleted}

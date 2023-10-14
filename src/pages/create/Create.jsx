@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import s from "./s_create.module.css";
 import Form from "./Form";
-const Create = ({ toggle, home_url, errorMsg, setErrorMsg }) => {
+
+const Create = ({ toggle, errorMsg, setErrorMsg }) => {
   return (
     <section
       className={`${s["create-section"]} ${
@@ -14,7 +15,6 @@ const Create = ({ toggle, home_url, errorMsg, setErrorMsg }) => {
       <Form
         method={"POST"}
         toggle={toggle}
-        home_url={home_url}
         errorMsg={errorMsg}
         setErrorMsg={setErrorMsg}
       />

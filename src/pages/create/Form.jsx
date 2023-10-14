@@ -5,7 +5,9 @@ import { postToApi } from "/src/utils/usePostToApi.js";
 import { useNavigate } from "react-router-dom";
 import FormDetails from "./FormDetails";
 import useForm from "/src/utils/useForm";
-const Form = ({ toggle, home_url, errorMsg, setErrorMsg }) => {
+import { allTasks } from "../../utils/endpoints";
+
+const Form = ({ toggle, errorMsg, setErrorMsg }) => {
   const Navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
   const ref = useRef(null);
@@ -21,7 +23,7 @@ const Form = ({ toggle, home_url, errorMsg, setErrorMsg }) => {
       if (checkDate) {
         setDisabled(true);
         setErrorMsg(false);
-        fetch(home_url, postToApi("POST", form))
+        fetch(allTasks, postToApi("POST", form))
           .then((res) => {
             if (res.ok) Navigate("/");
           })

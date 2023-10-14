@@ -1,4 +1,4 @@
-const apiKey = import.meta.env.VITE_PRIVATE_KEY;
+const apiKey = import.meta.env.VITE_APP_PRIVATE_KEY;
 export const options = {
   method: "GET",
   headers: {

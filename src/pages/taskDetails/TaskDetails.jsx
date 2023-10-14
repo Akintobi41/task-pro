@@ -8,9 +8,8 @@ import { deleteOptions, postToApi } from "/src/utils/usePostToApi.js";
 import Loader from "../../components/preloader/Loader";
 import { options } from "../../utils/options";
 import ConfirmDelete from "../../components/confirmDelete/ConfirmDelete";
-
+import { allTasks } from "../../utils/endpoints";
 const TaskDetails = ({
-  home_url,
   toggle,
   recentlyDeleted,
   setRecentlyDeleted,
@@ -68,7 +67,7 @@ const TaskDetails = ({
   useEffect(() => {
     // Update Task
     if (tracker) {
-      fetch(`${home_url}${id}`, postToApi("PUT", form)).then((res) => {
+      fetch(`${allTasks}${id}`, postToApi("PUT", form)).then((res) => {
         if (!res.ok)
           throw Error(
             "unable to update task at the moment, please try again later",
@@ -77,9 +76,9 @@ const TaskDetails = ({
       });
     }
     setTracker(false);
-  }, [form, home_url, id, tracker, Navigate]);
+  }, [form, allTasks, id, tracker, Navigate]);
   useEffect(() => {
-    fetch(`${home_url}${id}`, options)
+    fetch(`${allTasks}${id}`, options)
       .then((res) => {
         // Check if the response is OK; otherwise, throw an error
         if (!res.ok)
@@ -111,7 +110,7 @@ const TaskDetails = ({
   function confirmDelete() {
     setDialogue(false);
     setDeleted(true);
-    fetch(`${home_url}${id}`, deleteOptions).then((res) => {
+    fetch(`${allTasks}${id}`, deleteOptions).then((res) => {
       if (!res.ok)
         throw Error(
           "unable to delete task at the moment, please try again later",
