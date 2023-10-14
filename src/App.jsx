@@ -9,7 +9,7 @@ import DarkMode from "./components/dark-mode/DarkMode";
 import Deleted from "./pages/deleted/Deleted";
 
 function App() {
-  const home_url = import.meta.env.VITE_BASE_URL;
+  const home_url = import.meta.env.VITE_APP_BASE_URL;
   const darkMode = JSON.parse(localStorage.getItem("mode"));
   const deletedHistory = JSON.parse(localStorage.getItem("history"));
   const [toggle, setToggle] = useState(darkMode);
