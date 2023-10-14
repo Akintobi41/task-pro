@@ -9,9 +9,11 @@ import ChangeView from "../../components/change view/ChangeView";
 import Filter from "../../components/filter/Filter";
 import usePagination from "../../utils/usePagination";
 import RefreshButton from "../../components/refreshBtn/RefreshButton";
-const Home = ({ home_url, toggle, setToggle }) => {
-  const url = `${home_url}?limit=50&project=1205465631047325&opt_fields=completed,created_at,due_on,followers,hearted,projects.name,modified_at,followers,name,notes`;
-  const { data, loading, error, status, setData, fetchData } = useFetch(url);
+import { allTasks } from "../../utils/endpoints";
+
+const Home = ({ toggle, setToggle }) => {
+  const { data, loading, error, status, setData, fetchData } =
+    useFetch(allTasks);
   const [grid, setGrid] = useState(false);
   const {
     handleNext,
