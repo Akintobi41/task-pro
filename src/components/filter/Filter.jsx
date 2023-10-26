@@ -40,7 +40,12 @@ const Filter = ({ data, setData, setExactPage }) => {
     }[val];
 
     setData(result || list);
+    console.log(data);
+    console.log(result);
+    console.log(list);
     setExactPage(1);
+    console.log(localStorage);
+    localStorage.setItem("data", JSON.stringify(data));
   }
 
   return (

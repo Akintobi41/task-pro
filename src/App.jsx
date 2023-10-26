@@ -9,10 +9,22 @@ import DarkMode from "./components/dark-mode/DarkMode";
 import Deleted from "./pages/deleted/Deleted";
 
 function App() {
+  let deletedHistory = [];
+  try {
+    //Attempt to parse the data from localStorage
+    deletedHistory = JSON.parse(localStorage.getItem("history"));
+    if (!Array.isArray(deletedHistory)) {
+      console.log("Data is not in expected format");
+      deletedHistory = [];
+    }
+  } catch (error) {
+    // handle errors
+    deletedHistory = []; // default value
+  }
+
   const darkMode = JSON.parse(localStorage.getItem("mode"));
-  const deletedHistory = JSON.parse(localStorage.getItem("history"));
   const [toggle, setToggle] = useState(darkMode);
-  const [recentlyDeleted, setRecentlyDeleted] = useState(deletedHistory || []);
+  const [recentlyDeleted, setRecentlyDeleted] = useState(...deletedHistory);
   const [errorMsg, setErrorMsg] = useState(false);
 
   useEffect(() => {

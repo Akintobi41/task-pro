@@ -1,19 +1,65 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import s from "./s_home.module.css";
 import Loader from "../../components/preloader/Loader";
-import useFetch from "/src/utils/useFetch.js";
 import { Link } from "react-router-dom";
 import TaskList from "../../components/task-list/TaskList";
-import { useState } from "react";
 import ChangeView from "../../components/change view/ChangeView";
 import Filter from "../../components/filter/Filter";
 import usePagination from "../../utils/usePagination";
 import RefreshButton from "../../components/refreshBtn/RefreshButton";
 import { allTasks } from "../../utils/endpoints";
+import { useEffect, useState } from "react";
+import { options } from "../../utils/options";
 
 const Home = ({ toggle, setToggle }) => {
-  const { data, loading, error, status, setData, fetchData } =
-    useFetch(allTasks);
+  const newData = JSON.parse(localStorage.getItem("data"));
+  const [data, setData] = useState(newData);
+  const [refresh, setRefresh] = useState(false);
+  const [loading, isLoading] = useState(false);
+  const [status, setStatus] = useState();
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    localStorage.setItem("data", JSON.stringify(data));
+    // check localStorage and set State if there is data found in the localStorage
+    if (newData?.length) {
+      setData(newData);
+      isLoading(true);
+    } else {
+      // Process tasks from the server.
+      fetchData();
+    }
+  }, []);
+
+  if (refresh) {
+    localStorage.setItem("data", JSON.stringify(data));
+  }
+
+  function fetchData() {
+    setData([]);
+    isLoading(false);
+    fetch(allTasks, options)
+      .then((res) => {
+        // Check if the response is OK; otherwise, throw an error
+        if (!res.ok)
+          throw Error(
+            "No tasks available at the moment. Please try again later...",
+          );
+        return res.json();
+      })
+      .then((res) => {
+        isLoading(true);
+        setData(res.data);
+        setRefresh(true);
+        setError(false);
+        if (!res.data.length) setStatus(true);
+      })
+      .catch((err) => {
+        isLoading(true);
+        setError(err.message);
+      });
+  }
+
   const [grid, setGrid] = useState(false);
   const {
     handleNext,
@@ -24,6 +70,8 @@ const Home = ({ toggle, setToggle }) => {
     exactPage,
     setExactPage,
   } = usePagination(data);
+  console.log(data, "data");
+  console.log(newData, "newData");
 
   return (
     <>

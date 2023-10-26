@@ -92,13 +92,13 @@ const FormDetails = ({
                   required
                   disabled={disabled}
                 />
-                {label.name === "start_date" && errorMsg ? (
+                {/* {label.name === "start_date" && errorMsg ? (
                   <p className={s["date-error"]}>
                     Start date cannot be after the due date.
                   </p>
                 ) : (
                   ""
-                )}
+                )} */}
               </>
             )}
           </label>

@@ -7,18 +7,21 @@ const Deleted = ({ recentlyDeleted, setRecentlyDeleted, toggle }) => {
     temp.splice(item, 1);
     setRecentlyDeleted(temp);
   }
+  function clearAll() {
+    setRecentlyDeleted([]);
+  }
   useEffect(() => {}, [recentlyDeleted]);
   return (
     <section className={s["deleted-section"]}>
       <small className={` ${s.small} ${toggle ? s["dark"] : ""}`}>
         Recently Deleted Tasks
       </small>
-      {!recentlyDeleted.length && (
+      {!recentlyDeleted?.length && (
         <p className={` ${s.small} ${s.p} ${toggle ? s["dark"] : ""}`}>
           No tasks to display
         </p>
       )}
-      {recentlyDeleted.length != "0" && (
+      {recentlyDeleted && (
         <table className={`${s["items"]} ${toggle ? s["items-dark"] : ""}`}>
           <tbody>
             <tr>
@@ -31,12 +34,13 @@ const Deleted = ({ recentlyDeleted, setRecentlyDeleted, toggle }) => {
                     src="/Images/icons8-delete-all-50.png"
                     alt="delete-all-permanently"
                     className={s["bin-all"]}
+                    onClick={clearAll}
                   />
                   <span className={s["tool-tipText"]}>Delete All</span>
                 </span>
               </th>
             </tr>
-            {recentlyDeleted.map((item) => (
+            {recentlyDeleted?.map((item) => (
               <tr key={item.gid}>
                 <td className={s.td}>{item.name}</td>
                 <td className={s.td}>

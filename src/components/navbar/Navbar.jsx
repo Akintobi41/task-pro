@@ -26,7 +26,7 @@ const Navbar = ({ toggle }) => {
             </Link>
           ) : (
             <Link
-              to={`/${item.slice(0)}`}
+              to={`/${item.toLowerCase()}`}
               key={item}
               className={`${s["nav-items"]} ${toggle ? s["dark-items"] : ""}`}
             >
