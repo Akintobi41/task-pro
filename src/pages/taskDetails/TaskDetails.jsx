@@ -8,19 +8,16 @@ import Loader from "../../components/preloader/Loader";
 import { options } from "../../utils/options";
 import { BASE_URL } from "../../utils/endpoints";
 import ConfirmDelete from "../../components/confirmDelete/ConfirmDelete";
-import { allTasks } from "../../utils/endpoints";
 import { getClass, shortenTask } from "./u_TaskDetails";
 import RenderFormInput from "./RenderFormInput";
-import useDataApiHandler from "../../utils/useApiDataHandler";
+import useDataApiHandler from "/src/hooks/useApiDataHandler.js";
 
 const TaskDetails = ({
   toggle,
   recentlyDeleted,
   setRecentlyDeleted,
-  errorMsg,
   setErrorMsg,
 }) => {
-  const el = useRef();
   const [tracker, setTracker] = useState(false);
   const [deleted, setDeleted] = useState(false);
   const { id } = useParams();
@@ -37,7 +34,7 @@ const TaskDetails = ({
   const [loading, setLoading] = useState(false);
   const [dialogue, setDialogue] = useState(false);
   const [btn, setBtn] = useState("");
-  const [error, setError] = useState("");
+  const [update, setUpdate] = useState(false);
   const { updateData } = useDataApiHandler(form);
   const currentTaskUrl = `${BASE_URL}${id}`;
 
@@ -75,16 +72,16 @@ const TaskDetails = ({
       // Merge properties from Form Json into the form object
       setForm({ ...form, ...formJson });
       setTracker(true);
+      setUpdate(true);
     };
 
-    // Event Listener can only be added when component has been mounted
+    // Event Listener added when component has been mounted to avoid errors
     if (loading) {
       const element = ref.current;
       element.addEventListener("submit", handleSubmit);
 
       return () => {
         element.removeEventListener("submit", handleSubmit);
-        console.log("clean up");
       };
     }
   }, [form, loading]);
@@ -98,14 +95,15 @@ const TaskDetails = ({
   }, [tracker]);
 
   //Delete Task
-  const handleDelete = () => {
+  function handleDelete() {
     setDialogue(true);
-  };
+  }
 
   function cancel() {
     setDialogue(false);
   }
   function confirmDelete() {
+    setDisabled(true);
     setDialogue(false);
     setDeleted(true);
     updateData("DELETE", currentTaskUrl);
@@ -159,7 +157,7 @@ const TaskDetails = ({
                   disabled={disabled}
                   value="update"
                 >
-                  {disabled ? "Updating Task..." : "Update Task"}
+                  {update ? "Updating Task..." : "Update Task"}
                 </button>{" "}
               </section>
             </form>

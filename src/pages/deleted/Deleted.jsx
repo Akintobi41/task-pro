@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import s from "./s_Deleted.module.css";
 const Deleted = ({ recentlyDeleted, setRecentlyDeleted, toggle }) => {
+  console.log(recentlyDeleted);
   function clear(item) {
     const temp = [...recentlyDeleted];
     temp.splice(item, 1);
@@ -10,7 +11,7 @@ const Deleted = ({ recentlyDeleted, setRecentlyDeleted, toggle }) => {
   function clearAll() {
     setRecentlyDeleted([]);
   }
-  useEffect(() => {}, [recentlyDeleted]);
+  // useEffect(() => {}, [recentlyDeleted]);
   return (
     <section className={s["deleted-section"]}>
       <small className={` ${s.small} ${toggle ? s["dark"] : ""}`}>
@@ -21,7 +22,7 @@ const Deleted = ({ recentlyDeleted, setRecentlyDeleted, toggle }) => {
           No tasks to display
         </p>
       )}
-      {recentlyDeleted && (
+      {recentlyDeleted?.length ? (
         <table className={`${s["items"]} ${toggle ? s["items-dark"] : ""}`}>
           <tbody>
             <tr>
@@ -35,6 +36,7 @@ const Deleted = ({ recentlyDeleted, setRecentlyDeleted, toggle }) => {
                     alt="delete-all-permanently"
                     className={s["bin-all"]}
                     onClick={clearAll}
+                    loading="lazy"
                   />
                   <span className={s["tool-tipText"]}>Delete All</span>
                 </span>
@@ -52,6 +54,7 @@ const Deleted = ({ recentlyDeleted, setRecentlyDeleted, toggle }) => {
                     src="/Images/icons8-bin-50.png"
                     alt="delete-permanently"
                     className={s.bin}
+                    loading="lazy"
                     onClick={() => clear(item)}
                   />
                 </td>
@@ -59,7 +62,7 @@ const Deleted = ({ recentlyDeleted, setRecentlyDeleted, toggle }) => {
             ))}
           </tbody>
         </table>
-      )}
+      ) : null}
     </section>
   );
 };

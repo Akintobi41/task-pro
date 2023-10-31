@@ -42,6 +42,8 @@ const TaskList = ({
                   <img
                     src="/Images/icons8-favorite.svg"
                     className={s.favorites}
+                    loading="lazy"
+                    alt="favorite-icon"
                   />
                 )}
                 <p className={s["task-name"]}>{shrinkName(task)}</p>{" "}
@@ -58,6 +60,7 @@ const TaskList = ({
                       src="/Images/calendar.png"
                       alt="created_at"
                       className={s.calendar}
+                      loading="lazy"
                     />{" "}
                     <small className={s["date-created"]}>
                       {" "}
@@ -69,6 +72,7 @@ const TaskList = ({
                       src="/Images/user.png"
                       alt="followers"
                       className={s["followers-img"]}
+                      loading="lazy"
                     />
                     <p className={s["followers-length"]}>
                       {task.followers.length}
@@ -90,9 +94,7 @@ const TaskList = ({
           totalPages={totalPages}
           exactPage={exactPage}
         />
-      ) : (
-        false
-      )}
+      ) : null}
     </>
   );
 };

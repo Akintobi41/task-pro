@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import s from "./s_Filter.module.css";
-const Filter = ({ data, setData, setExactPage }) => {
+const Filter = ({ data, setData, setExactPage, setNoContent, setError }) => {
   const [list, setList] = useState([]);
   const [value, setValue] = useState("");
 
   useEffect(() => {
     setList(data); // Data to be used for filter and sorting that doesn't change
+    setNoContent(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -21,6 +22,7 @@ const Filter = ({ data, setData, setExactPage }) => {
   ];
 
   function sortOrFilter(e) {
+    setError(false);
     const val = e.target.value;
     setValue(val);
     const result = {
@@ -37,15 +39,18 @@ const Filter = ({ data, setData, setExactPage }) => {
       Favorites: [...list].filter((todo) => todo.hearted),
       Completed: [...list].filter((todo) => todo.completed),
       "Not Completed": [...list].filter((todo) => !todo.completed),
+      "All data": [...list],
     }[val];
-
-    setData(result || list);
-    console.log(data);
-    console.log(result);
-    console.log(list);
+    if (!result || result.length === 0) {
+      setNoContent(true);
+      setData(list);
+      console.log(result);
+      console.log(list);
+    } else {
+      setNoContent(false);
+      setData(result);
+    }
     setExactPage(1);
-    console.log(localStorage);
-    localStorage.setItem("data", JSON.stringify(data));
   }
 
   return (

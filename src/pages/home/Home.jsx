@@ -2,23 +2,49 @@
 /* eslint-disable react/prop-types */
 import s from "./s_home.module.css";
 import Loader from "../../components/preloader/Loader";
-import { Link } from "react-router-dom";
-import TaskList from "../../components/task-list/TaskList";
-import ChangeView from "../../components/change view/ChangeView";
-import Filter from "../../components/filter/Filter";
-import usePagination from "../../utils/usePagination";
-import RefreshButton from "../../components/refreshBtn/RefreshButton";
+// import ChangeView from "../../components/change view/ChangeView";
+// import Filter from "../../components/filter/Filter";
+import usePagination from "/src/hooks/usePagination.js";
+// import RefreshButton from "../../components/refreshBtn/RefreshButton";
 import { allTasks } from "../../utils/endpoints";
-import { useEffect, useState } from "react";
-import { options } from "../../utils/options";
+import { useEffect, useState, lazy } from "react";
+// import { options } from "../../utils/options";
+// import CreateNewSection from "../../components/createNewSection/CreateNewSection";
+// import ErrorDisplay from "../../components/errorDisplay/ErrorDisplay";
+// import ConditionalRender from "../../components/conditionalRender/ConditionalRender";
+
+const options = lazy(() => import("../../utils/options"));
+const ChangeView = lazy(() =>
+  import("../../components/change view/ChangeView"),
+);
+const Filter = lazy(() => import("../../components/filter/Filter"));
+const RefreshButton = lazy(() =>
+  import("../../components/refreshBtn/RefreshButton"),
+);
+const CreateNewSection = lazy(() =>
+  import("../../components/createNewSection/CreateNewSection"),
+);
+const ErrorDisplay = lazy(() =>
+  import("../../components/errorDisplay/ErrorDisplay"),
+);
+const ConditionalRender = lazy(() =>
+  import("../../components/conditionalRender/ConditionalRender"),
+);
 
 const Home = ({ toggle, setToggle }) => {
-  const newData = JSON.parse(localStorage.getItem("data"));
+  let newData = [];
+  try {
+    newData = JSON.parse(localStorage.getItem("data"));
+  } catch (error) {
+    newData = [];
+  }
   const [data, setData] = useState(newData);
   const [refresh, setRefresh] = useState(false);
   const [loading, isLoading] = useState(false);
   const [status, setStatus] = useState();
   const [error, setError] = useState(null);
+  const [noContent, setNoContent] = useState(false);
+
   useEffect(() => {
     localStorage.setItem("data", JSON.stringify(data));
     // check localStorage and set State if there is data found in the localStorage
@@ -70,8 +96,6 @@ const Home = ({ toggle, setToggle }) => {
     exactPage,
     setExactPage,
   } = usePagination(data);
-  console.log(data, "data");
-  console.log(newData, "newData");
 
   return (
     <>
@@ -79,43 +103,28 @@ const Home = ({ toggle, setToggle }) => {
         {!loading && (
           <Loader loading={loading} toggle={toggle} setToggle={setToggle} />
         )}
+        <section className={s["toggle-section"]}>
+          {!status && (
+            <>
+              <Filter
+                data={data}
+                setData={setData}
+                setExactPage={setExactPage}
+                setNoContent={setNoContent}
+                setError={setError}
+                status={status}
+              />
 
-        {data?.length ? (
-          <section className={s["toggle-section"]}>
-            <Filter data={data} setData={setData} setExactPage={setExactPage} />
-            <ChangeView grid={grid} setGrid={setGrid} toggle={toggle} />
-          </section>
-        ) : (
-          false
-        )}
-        {!status && <RefreshButton toggle={toggle} fetchData={fetchData} />}
-        {status && (
-          <section className={s["create-new"]}>
-            {" "}
-            <p
-              className={`${s["create-new-text"]} ${
-                toggle ? s["create-text-dark"] : ""
-              }`}
-            >
-              No tasks created yet, ready to personalize ?
-              <Link
-                to="/create"
-                className={`${s["create-new-link"]} ${
-                  toggle ? s["create-text-dark"] : ""
-                }`}
-              >
-                {" "}
-                Let{`'`}s get started
-              </Link>
-            </p>
-          </section>
-        )}
-        {error && (
-          <p className={`${s["error"]} ${toggle ? s["error-dark"] : ""}`}>
-            Failed to fetch data...
-          </p>
-        )}
-        <TaskList
+              <ChangeView grid={grid} setGrid={setGrid} toggle={toggle} />
+            </>
+          )}
+        </section>
+
+        <RefreshButton toggle={toggle} fetchData={fetchData} status={status} />
+        <CreateNewSection />
+        <ErrorDisplay error={error} toggle={toggle} />
+        <ConditionalRender
+          noContent={noContent}
           loading={loading}
           status={status}
           data={data}

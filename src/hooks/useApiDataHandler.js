@@ -1,12 +1,15 @@
-import { gidKey, apiKey } from "./endpoints";
+import { gidKey, apiKey } from "../utils/endpoints";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 
 const useDataApiHandler = (task) => {
 
   const { name, completed, due_date, liked, notes } = task;
+  const [errorValues, setErrorValues] = useState({ response: true, disabled: false, message: '' })
   const Navigate = useNavigate()
 
   function updateData(method, url) {
+    setErrorValues({ ...errorValues, response: true, disabled: false })
     const options = {
       method: method,
       headers: {
@@ -35,13 +38,17 @@ const useDataApiHandler = (task) => {
           throw Error('unable to complete task')
         }
         Navigate('/')
+        setErrorValues({ ...errorValues, response: true, disabled: true })
         return res.json()
 
       })
       .then((res) => console.log(res))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error.message)
+        setErrorValues({ response: false, disabled: false, message: error.message })
+      })
+
   }
-  return { updateData }
+  return { updateData, errorValues, setErrorValues }
 };
 export default useDataApiHandler
-

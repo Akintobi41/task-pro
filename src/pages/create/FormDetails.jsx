@@ -1,17 +1,38 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import s from "./s_create.module.css";
 import { formDetails } from "./form_details";
+import { useEffect } from "react";
 const FormDetails = ({
   form,
   disabled,
   handleChange,
   myref,
   toggle,
-  errorMsg,
+  errorValues,
+  setDisabled,
+  setErrorValues,
 }) => {
+  useEffect(() => {
+    if (!errorValues?.response) {
+      const timer = setTimeout(() => {
+        setErrorValues({ ...errorValues, response: true });
+        setDisabled(false);
+      }, 2000);
+      return () => {
+        clearInterval(timer);
+      };
+    }
+  }, [errorValues]);
+
   return (
     <>
-      <form action="" className={s.form} ref={myref}>
+      {!errorValues?.response ? (
+        <p className={s["error-message"]}>
+          An error occurred. Please try again.
+        </p>
+      ) : null}
+      <form className={s.form} ref={myref}>
         {formDetails.map((label) => (
           <label
             className={`${
@@ -75,7 +96,7 @@ const FormDetails = ({
                   onChange={(e) => handleChange(e)}
                   required
                   disabled={disabled}
-                ></textarea>
+                />
               </>
             ) : (
               <>
@@ -92,13 +113,6 @@ const FormDetails = ({
                   required
                   disabled={disabled}
                 />
-                {/* {label.name === "start_date" && errorMsg ? (
-                  <p className={s["date-error"]}>
-                    Start date cannot be after the due date.
-                  </p>
-                ) : (
-                  ""
-                )} */}
               </>
             )}
           </label>

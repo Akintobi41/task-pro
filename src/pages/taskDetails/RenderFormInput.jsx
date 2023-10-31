@@ -38,7 +38,12 @@ const RenderFormInput = ({ label, data, disabled }) => {
         defaultValue={data.notes}
         required
         disabled={disabled}
-      ></textarea>
+        rows={
+          data.notes?.length > 50
+            ? data.notes?.length / 20
+            : data.notes?.length / 10
+        }
+      />
     </>
   ) : (
     <>
