@@ -60,17 +60,19 @@ const Home = ({ toggle, setToggle }) => {
   if (refresh) {
     localStorage.setItem("data", JSON.stringify(data));
   }
-
   function fetchData() {
     setData([]);
     isLoading(false);
     fetch(allTasks, options)
       .then((res) => {
         // Check if the response is OK; otherwise, throw an error
-        if (!res.ok)
+        if (!res.ok) {
+          console.log(res);
+
           throw Error(
             "No tasks available at the moment. Please try again later...",
           );
+        }
         return res.json();
       })
       .then((res) => {
@@ -83,6 +85,7 @@ const Home = ({ toggle, setToggle }) => {
       .catch((err) => {
         isLoading(true);
         setError(err.message);
+        console.log(error);
       });
   }
 
