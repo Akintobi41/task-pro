@@ -14,7 +14,7 @@
   height: 1.1rem;
   border-radius: 160px;
   cursor: pointer;
-  background: url("/moon-svgrepo-com.svg") no-repeat;
+  background-repeat: no-repeat;
   background-size: 70% 70%;
   background-position: 20px;
   box-shadow:

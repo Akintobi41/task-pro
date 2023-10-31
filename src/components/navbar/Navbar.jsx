@@ -10,6 +10,7 @@ const Navbar = ({ toggle }) => {
           src="/Images/success.png"
           alt="completed successfully"
           className={s.logo}
+          loading="lazy"
         />
         <h3 className={` ${s.h3} ${toggle ? s["dark-items"] : ""}`}>TaskPro</h3>
       </Link>
@@ -26,7 +27,7 @@ const Navbar = ({ toggle }) => {
             </Link>
           ) : (
             <Link
-              to={`/${item.slice(0)}`}
+              to={`/${item.toLowerCase()}`}
               key={item}
               className={`${s["nav-items"]} ${toggle ? s["dark-items"] : ""}`}
             >

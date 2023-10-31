@@ -1,8 +1,9 @@
 .create-section {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
+  padding: 0 1rem;
 }
 
 .create-section-dark {
@@ -13,6 +14,7 @@
   text-align: center;
   font-style: italic;
   font-weight: 500;
+  padding: .25rem;
 }
 
 .task-name-label {
@@ -142,4 +144,42 @@
   color: red;
   font-weight: bold;
   transition: all 0.3s;
+}
+
+/* Define the animation keyframes */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Apply the animation to the error message */
+.error-message {
+  animation: fadeInOut 4s ease-in-out;
+}
+
+/* Style the error message */
+.error-message {
+  background-color: #ff6b6b;
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
 }
