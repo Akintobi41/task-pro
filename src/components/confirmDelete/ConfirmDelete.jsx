@@ -14,11 +14,14 @@ const ConfirmDelete = ({ setBtn, toggle, cancel, confirmDelete }) => {
       confirmDelete();
     }
   };
+
   return (
     <section className={s.dialogue}>
       <section className={`${s["dialogue-header"]} ${toggle ? s.dark : ""}`}>
         <h5>Are you sure</h5>
-        <button className={s["close-button"]}>x</button>
+        <button className={s["close-button"]} onClick={cancel}>
+          x
+        </button>
       </section>
       <section className={s["dialogue-content"]}>
         <p className={`${s["dialogue-text"]} ${toggle ? s.dark : ""}`}>
