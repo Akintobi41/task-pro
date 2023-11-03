@@ -2,16 +2,11 @@ import "./App.css";
 import Layout from "./components/layout/Layout";
 import Create from "./pages/create/Create";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useEffect, useState, lazy } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import Deleted from "./pages/deleted/Deleted";
-import Home from "./pages/home/Home";
-import TaskDetails from "./pages/taskDetails/TaskDetails";
-import DarkMode from "./components/dark-mode/DarkMode";
-
-// const Home = lazy(() => import("./pages/home/Home"));
-// const TaskDetails = lazy(() => import("./pages/taskDetails/TaskDetails"));
-// const DarkMode = lazy(() => import("./components/dark-mode/DarkMode"));
-console.log("import on pause");
+const Home = lazy(() => import("./pages/home/Home"));
+const TaskDetails = lazy(() => import("./pages/taskDetails/TaskDetails"));
+const DarkMode = lazy(() => import("./components/dark-mode/DarkMode"));
 
 function App() {
   let deletedHistory = [];
@@ -35,53 +30,55 @@ function App() {
   return (
     <div>
       <Router>
-        <Layout toggle={toggle}>
-          <DarkMode toggle={toggle} setToggle={setToggle} />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Home
-                  toggle={toggle}
-                  recentlyDeleted={recentlyDeleted}
-                  deletedHistory={deletedHistory}
-                />
-              }
-            />
-            <Route
-              path="/create"
-              element={
-                <Create
-                  toggle={toggle}
-                  errorMsg={errorMsg}
-                  setErrorMsg={setErrorMsg}
-                />
-              }
-            />
-            <Route
-              path={`/:id`}
-              element={
-                <TaskDetails
-                  toggle={toggle}
-                  recentlyDeleted={recentlyDeleted}
-                  setRecentlyDeleted={setRecentlyDeleted}
-                  errorMsg={errorMsg}
-                  setErrorMsg={setErrorMsg}
-                />
-              }
-            />
-            <Route
-              path="/deleted"
-              element={
-                <Deleted
-                  recentlyDeleted={recentlyDeleted}
-                  setRecentlyDeleted={setRecentlyDeleted}
-                  toggle={toggle}
-                />
-              }
-            />
-          </Routes>
-        </Layout>
+        <Suspense fallback={<h1>Loading</h1>}>
+          <Layout toggle={toggle}>
+            <DarkMode toggle={toggle} setToggle={setToggle} />
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Home
+                    toggle={toggle}
+                    recentlyDeleted={recentlyDeleted}
+                    deletedHistory={deletedHistory}
+                  />
+                }
+              />
+              <Route
+                path="/create"
+                element={
+                  <Create
+                    toggle={toggle}
+                    errorMsg={errorMsg}
+                    setErrorMsg={setErrorMsg}
+                  />
+                }
+              />
+              <Route
+                path={`/:id`}
+                element={
+                  <TaskDetails
+                    toggle={toggle}
+                    recentlyDeleted={recentlyDeleted}
+                    setRecentlyDeleted={setRecentlyDeleted}
+                    errorMsg={errorMsg}
+                    setErrorMsg={setErrorMsg}
+                  />
+                }
+              />
+              <Route
+                path="/deleted"
+                element={
+                  <Deleted
+                    recentlyDeleted={recentlyDeleted}
+                    setRecentlyDeleted={setRecentlyDeleted}
+                    toggle={toggle}
+                  />
+                }
+              />
+            </Routes>
+          </Layout>
+        </Suspense>
       </Router>
     </div>
   );
