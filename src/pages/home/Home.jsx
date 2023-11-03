@@ -9,11 +9,6 @@ import usePagination from "/src/hooks/usePagination.js";
 import { allTasks } from "../../utils/endpoints";
 import { useEffect, useState, lazy } from "react";
 import { options } from "../../utils/options";
-// import CreateNewSection from "../../components/createNewSection/CreateNewSection";
-// import ErrorDisplay from "../../components/errorDisplay/ErrorDisplay";
-// import ConditionalRender from "../../components/conditionalRender/ConditionalRender";
-
-// const options = lazy(() => import("../../utils/options"));
 const ChangeView = lazy(() =>
   import("../../components/change view/ChangeView"),
 );
