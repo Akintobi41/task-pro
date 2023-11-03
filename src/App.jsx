@@ -30,9 +30,9 @@ function App() {
   return (
     <div>
       <Router>
-        <Suspense fallback={<h1>Loading</h1>}>
-          <Layout toggle={toggle}>
-            <DarkMode toggle={toggle} setToggle={setToggle} />
+        <Layout toggle={toggle}>
+          <DarkMode toggle={toggle} setToggle={setToggle} />
+          <Suspense fallback={<h1>Loading</h1>}>
             <Routes>
               <Route
                 path="/"
@@ -77,8 +77,8 @@ function App() {
                 }
               />
             </Routes>
-          </Layout>
-        </Suspense>
+          </Suspense>
+        </Layout>
       </Router>
     </div>
   );
