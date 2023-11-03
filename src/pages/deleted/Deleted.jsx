@@ -2,7 +2,6 @@
 // import { useEffect } from "react";
 import s from "./s_Deleted.module.css";
 const Deleted = ({ recentlyDeleted, setRecentlyDeleted, toggle }) => {
-  console.log(recentlyDeleted);
   function clear(item) {
     const temp = [...recentlyDeleted];
     temp.splice(item, 1);

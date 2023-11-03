@@ -2,10 +2,7 @@
 /* eslint-disable react/prop-types */
 import s from "./s_home.module.css";
 import Loader from "../../components/preloader/Loader";
-// import ChangeView from "../../components/change view/ChangeView";
-// import Filter from "../../components/filter/Filter";
 import usePagination from "/src/hooks/usePagination.js";
-// import RefreshButton from "../../components/refreshBtn/RefreshButton";
 import { allTasks } from "../../utils/endpoints";
 import { useEffect, useState, lazy } from "react";
 import { options } from "../../utils/options";
@@ -119,7 +116,7 @@ const Home = ({ toggle, setToggle }) => {
         </section>
 
         <RefreshButton toggle={toggle} fetchData={fetchData} status={status} />
-        <CreateNewSection />
+        <CreateNewSection toggle={toggle} status={status} />
         <ErrorDisplay error={error} toggle={toggle} />
         <ConditionalRender
           noContent={noContent}
