@@ -56,6 +56,7 @@ const Filter = ({ data, setData, setExactPage, setNoContent, setError }) => {
   return (
     <>
       <select
+        aria-label="-Select--"
         value={value}
         onChange={(e) => sortOrFilter(e)}
         className={s.select}

@@ -1,11 +1,11 @@
 const setBg = (t, toggle) => {
   return !t.completed && toggle
-    ? "#ed6350"
+    ? "#972111"
     : t.completed && toggle
-    ? "#f5eee3"
-    : t.completed
-    ? "#f4ecdf"
-    : " #e74c3c";
+      ? "#f5eee3"
+      : t.completed
+        ? "#f4ecdf"
+        : "#972111";
 };
 const setCol = (t) => (t.completed ? "#141824" : "#f4ecdf");
 const shrinkName = (t) =>
