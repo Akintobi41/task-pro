@@ -1,18 +1,18 @@
 import "./App.css";
 import Layout from "./components/layout/Layout";
 // import Home from "./pages/home/Home";
-// import Create from "./pages/create/Create";
+import Create from "./pages/create/Create";
 // import TaskDetails from "./pages/taskDetails/TaskDetails";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState, lazy, Suspense } from "react";
 // import DarkMode from "./components/dark-mode/DarkMode";
-// import Deleted from "./pages/deleted/Deleted";
+import Deleted from "./pages/deleted/Deleted";
 // const Layout = lazy(() => import("./components/layout/Layout"));
 const Home = lazy(() => import("./pages/home/Home"));
-const Create = lazy(() => import("./pages/create/Create"));
+// const Create = lazy(() => import("./pages/create/Create"));
 const TaskDetails = lazy(() => import("./pages/taskDetails/TaskDetails"));
 const DarkMode = lazy(() => import("./components/dark-mode/DarkMode"));
-const Deleted = lazy(() => import("./pages/deleted/Deleted"));
+// const Deleted = lazy(() => import("./pages/deleted/Deleted"));
 
 function App() {
   let deletedHistory = [];
