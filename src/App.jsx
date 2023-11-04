@@ -33,34 +33,54 @@ function App() {
         <Layout toggle={toggle}>
           <DarkMode toggle={toggle} setToggle={setToggle} />
           <Routes>
-            <Suspense fallback={<h1>Loading</h1>}>
-              <Route
-                path="/"
-                element={
+            <Route
+              path="/"
+              element={
+                <Suspense
+                  fallback={
+                    <div
+                      style={{ minHeight: "100vh", background: "#60534659" }}
+                    ></div>
+                  }
+                >
                   <Home
                     toggle={toggle}
                     recentlyDeleted={recentlyDeleted}
                     deletedHistory={deletedHistory}
                   />
-                }
-              />
-            </Suspense>
-            <Suspense fallback={<h1>Loading</h1>}>
-              <Route
-                path="/create"
-                element={
+                </Suspense>
+              }
+            ></Route>
+
+            <Route
+              path="/create"
+              element={
+                <Suspense
+                  fallback={
+                    <div
+                      style={{ minHeight: "100vh", background: "#60534659" }}
+                    ></div>
+                  }
+                >
                   <Create
                     toggle={toggle}
                     errorMsg={errorMsg}
                     setErrorMsg={setErrorMsg}
                   />
-                }
-              />
-            </Suspense>
-            <Suspense fallback={<h1>Loading</h1>}>
-              <Route
-                path={`/:id`}
-                element={
+                </Suspense>
+              }
+            />
+
+            <Route
+              path={`/:id`}
+              element={
+                <Suspense
+                  fallback={
+                    <div
+                      style={{ minHeight: "100vh", background: "#60534659" }}
+                    ></div>
+                  }
+                >
                   <TaskDetails
                     toggle={toggle}
                     recentlyDeleted={recentlyDeleted}
@@ -68,21 +88,28 @@ function App() {
                     errorMsg={errorMsg}
                     setErrorMsg={setErrorMsg}
                   />
-                }
-              />
-            </Suspense>
-            <Suspense fallback={<h1>Loading</h1>}>
-              <Route
-                path="/deleted"
-                element={
+                </Suspense>
+              }
+            />
+
+            <Route
+              path="/deleted"
+              element={
+                <Suspense
+                  fallback={
+                    <div
+                      style={{ minHeight: "100vh", background: "#60534659" }}
+                    ></div>
+                  }
+                >
                   <Deleted
                     recentlyDeleted={recentlyDeleted}
                     setRecentlyDeleted={setRecentlyDeleted}
                     toggle={toggle}
                   />
-                }
-              />
-            </Suspense>
+                </Suspense>
+              }
+            />
           </Routes>
         </Layout>
       </Router>
