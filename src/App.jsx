@@ -30,10 +30,10 @@ function App() {
   return (
     <div>
       <Router>
-        <Suspense fallback={<h1>Loading</h1>}>
-          <Layout toggle={toggle}>
-            <DarkMode toggle={toggle} setToggle={setToggle} />
-            <Routes>
+        <Layout toggle={toggle}>
+          <DarkMode toggle={toggle} setToggle={setToggle} />
+          <Routes>
+            <Suspense fallback={<h1>Loading</h1>}>
               <Route
                 path="/"
                 element={
@@ -44,6 +44,8 @@ function App() {
                   />
                 }
               />
+            </Suspense>
+            <Suspense fallback={<h1>Loading</h1>}>
               <Route
                 path="/create"
                 element={
@@ -54,6 +56,8 @@ function App() {
                   />
                 }
               />
+            </Suspense>
+            <Suspense fallback={<h1>Loading</h1>}>
               <Route
                 path={`/:id`}
                 element={
@@ -66,6 +70,8 @@ function App() {
                   />
                 }
               />
+            </Suspense>
+            <Suspense fallback={<h1>Loading</h1>}>
               <Route
                 path="/deleted"
                 element={
@@ -76,9 +82,9 @@ function App() {
                   />
                 }
               />
-            </Routes>
-          </Layout>
-        </Suspense>
+            </Suspense>
+          </Routes>
+        </Layout>
       </Router>
     </div>
   );
