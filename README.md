@@ -1,4 +1,3 @@
-# React + Vite
 
 # Task Management Application
 
@@ -12,10 +11,9 @@ Explore a live demo of the application: [Task Management Demo](https://task-pro-
 
 In addition to task management, the application features a "Deleted Tasks" page. This page allows you to view previously deleted tasks and provides an option to permanently remove them from the local storage.
 
-## Built With
-
+## Tools Used
 - [React](https://reactjs.org/)
-- [Redux](https://redux.js.org/) for state management
+- [Prettier](https://prettier.io/)
 
 ## Getting Started
 
@@ -30,3 +28,19 @@ Make sure you have Node.js and npm (Node Package Manager) installed on your syst
 1. Clone the repository:
    ```sh
    git clone https://github.com/yourusername/task-management-app.git
+
+2. Change your working directory to the project folder:
+     cd task-management-app
+
+3. Install project dependencies:
+   npm install
+
+4. Start the development server:
+   npm run dev
+
+The application should now be accessible at http://localhost:3000 in your web browser.
+
+
+ 
+
+
