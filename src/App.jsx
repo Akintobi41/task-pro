@@ -1,18 +1,12 @@
 import "./App.css";
 import Layout from "./components/layout/Layout";
-// import Home from "./pages/home/Home";
-// import Create from "./pages/create/Create";
-// import TaskDetails from "./pages/taskDetails/TaskDetails";
+import Create from "./pages/create/Create";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState, lazy, Suspense } from "react";
-// import DarkMode from "./components/dark-mode/DarkMode";
-// import Deleted from "./pages/deleted/Deleted";
-// const Layout = lazy(() => import("./components/layout/Layout"));
+import Deleted from "./pages/deleted/Deleted";
 const Home = lazy(() => import("./pages/home/Home"));
-const Create = lazy(() => import("./pages/create/Create"));
 const TaskDetails = lazy(() => import("./pages/taskDetails/TaskDetails"));
 const DarkMode = lazy(() => import("./components/dark-mode/DarkMode"));
-const Deleted = lazy(() => import("./pages/deleted/Deleted"));
 
 function App() {
   let deletedHistory = [];
@@ -36,33 +30,57 @@ function App() {
   return (
     <div>
       <Router>
-        <Suspense fallback={<h1>Loading</h1>}>
-          <Layout toggle={toggle}>
-            <DarkMode toggle={toggle} setToggle={setToggle} />
-            <Routes>
-              <Route
-                path="/"
-                element={
+        <Layout toggle={toggle}>
+          <DarkMode toggle={toggle} setToggle={setToggle} />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Suspense
+                  fallback={
+                    <div
+                      style={{ minHeight: "100vh", background: "#60534659" }}
+                    ></div>
+                  }
+                >
                   <Home
                     toggle={toggle}
                     recentlyDeleted={recentlyDeleted}
                     deletedHistory={deletedHistory}
                   />
-                }
-              />
-              <Route
-                path="/create"
-                element={
+                </Suspense>
+              }
+            ></Route>
+
+            <Route
+              path="/create"
+              element={
+                <Suspense
+                  fallback={
+                    <div
+                      style={{ minHeight: "100vh", background: "#60534659" }}
+                    ></div>
+                  }
+                >
                   <Create
                     toggle={toggle}
                     errorMsg={errorMsg}
                     setErrorMsg={setErrorMsg}
                   />
-                }
-              />
-              <Route
-                path={`/:id`}
-                element={
+                </Suspense>
+              }
+            />
+
+            <Route
+              path={`/:id`}
+              element={
+                <Suspense
+                  fallback={
+                    <div
+                      style={{ minHeight: "100vh", background: "#60534659" }}
+                    ></div>
+                  }
+                >
                   <TaskDetails
                     toggle={toggle}
                     recentlyDeleted={recentlyDeleted}
@@ -70,21 +88,30 @@ function App() {
                     errorMsg={errorMsg}
                     setErrorMsg={setErrorMsg}
                   />
-                }
-              />
-              <Route
-                path="/deleted"
-                element={
+                </Suspense>
+              }
+            />
+
+            <Route
+              path="/deleted"
+              element={
+                <Suspense
+                  fallback={
+                    <div
+                      style={{ minHeight: "100vh", background: "#60534659" }}
+                    ></div>
+                  }
+                >
                   <Deleted
                     recentlyDeleted={recentlyDeleted}
                     setRecentlyDeleted={setRecentlyDeleted}
                     toggle={toggle}
                   />
-                }
-              />
-            </Routes>
-          </Layout>
-        </Suspense>
+                </Suspense>
+              }
+            />
+          </Routes>
+        </Layout>
       </Router>
     </div>
   );
