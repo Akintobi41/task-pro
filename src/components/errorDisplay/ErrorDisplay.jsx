@@ -5,7 +5,7 @@ const ErrorDisplay = ({ toggle, error }) => {
     <>
       {error && (
         <p className={`${s["error"]} ${toggle ? s["error-dark"] : ""}`}>
-          Failed to fetch data...
+          Failed to fetch data
         </p>
       )}
     </>

@@ -20,7 +20,7 @@ function App() {
 
   const darkMode = JSON.parse(localStorage.getItem("mode"));
   const [toggle, setToggle] = useState(darkMode);
-  const [recentlyDeleted, setRecentlyDeleted] = useState(deletedHistory);
+  const [recentlyDeleted, setRecentlyDeleted] = useState(deletedHistory || []);
   const [errorMsg, setErrorMsg] = useState(false);
   useEffect(() => {
     localStorage.setItem("mode", JSON.stringify(toggle));

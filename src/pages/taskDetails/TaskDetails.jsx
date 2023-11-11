@@ -107,7 +107,7 @@ const TaskDetails = ({
     setDialogue(false);
     setDeleted(true);
     updateData("DELETE", currentTaskUrl);
-    setRecentlyDeleted([...recentlyDeleted, data]);
+    setRecentlyDeleted([...(recentlyDeleted ?? []), data]);
   }
 
   return (

@@ -2,29 +2,14 @@
 /* eslint-disable react/prop-types */
 import s from "./s_create.module.css";
 import { formDetails } from "./form_details";
-import { useEffect } from "react";
 const FormDetails = ({
   form,
-  disabled,
   handleChange,
   myref,
   toggle,
   errorValues,
-  setDisabled,
-  setErrorValues,
+  disabled,
 }) => {
-  useEffect(() => {
-    if (!errorValues?.response) {
-      const timer = setTimeout(() => {
-        setErrorValues({ ...errorValues, response: true });
-        setDisabled(false);
-      }, 2000);
-      return () => {
-        clearInterval(timer);
-      };
-    }
-  }, [errorValues]);
-
   return (
     <>
       {!errorValues?.response ? (
@@ -66,7 +51,7 @@ const FormDetails = ({
                       value={true}
                       onChange={(e) => handleChange(e)}
                       required
-                      disabled={disabled}
+                      disabled={errorValues?.disabled}
                     />
                   </label>{" "}
                   <label className={s["radio-label"]}>
@@ -79,7 +64,7 @@ const FormDetails = ({
                       value={false}
                       onChange={(e) => handleChange(e)}
                       required
-                      disabled={disabled}
+                      disabled={errorValues?.disabled}
                     />
                   </label>
                 </section>
@@ -95,7 +80,7 @@ const FormDetails = ({
                   value={form.notes}
                   onChange={(e) => handleChange(e)}
                   required
-                  disabled={disabled}
+                  disabled={errorValues?.disabled}
                 />
               </>
             ) : (
@@ -111,7 +96,7 @@ const FormDetails = ({
                   onChange={(e) => handleChange(e)}
                   autoComplete="on"
                   required
-                  disabled={disabled}
+                  disabled={errorValues?.disabled}
                 />
               </>
             )}
@@ -120,12 +105,12 @@ const FormDetails = ({
         <section className={s["button-section"]}>
           {" "}
           <button
-            className={`${s["submit-button"]} ${disabled ? s.disabled : ""} ${
-              toggle ? s["btn-dark"] : ""
-            }`}
-            disabled={disabled}
+            className={`${s["submit-button"]} ${
+              disabled === null || disabled === undefined ? s.disabled : ""
+            } ${toggle ? s["btn-dark"] : ""}`}
+            disabled={errorValues?.disabled}
           >
-            {disabled ? "Adding Task..." : "Add Task"}
+            {errorValues?.disabled ? "Adding Task..." : "Add Task"}
           </button>{" "}
         </section>
       </form>

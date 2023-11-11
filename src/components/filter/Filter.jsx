@@ -60,6 +60,7 @@ const Filter = ({ data, setData, setExactPage, setNoContent, setError }) => {
         value={value}
         onChange={(e) => sortOrFilter(e)}
         className={s.select}
+        name="select"
       >
         {option.map((option) => (
           <option

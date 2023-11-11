@@ -5,22 +5,21 @@ import FormDetails from "./FormDetails";
 import useForm from "/src/hooks/useForm.js";
 import { allTasks } from "../../utils/endpoints";
 import useDataApiHandler from "../../hooks/useApiDataHandler";
-// import s from "./s_create.module.css";
 
 const Form = ({ toggle, errorMsg, setErrorMsg }) => {
-  const [disabled, setDisabled] = useState(false);
   const ref = useRef(null);
   const { form, handleChange } = useForm();
+  // eslint-disable-next-line no-unused-vars
+  const [disabled, setDisabled] = useState(true);
   const { updateData, errorValues, setErrorValues } = useDataApiHandler(form);
-  // let newEl;
 
   useEffect(() => {
     const handleSubmit = (e) => {
       e.preventDefault();
-      setDisabled(true);
       updateData("POST", allTasks);
-      setErrorValues();
+      setErrorValues({ ...errorValues, response: true, disabled: true });
     };
+
     const element = ref.current;
     element.addEventListener("submit", handleSubmit);
     return () => element.removeEventListener("submit", handleSubmit);
@@ -28,15 +27,14 @@ const Form = ({ toggle, errorMsg, setErrorMsg }) => {
 
   return (
     <FormDetails
-      disabled={disabled}
       handleChange={handleChange}
+      disabled={disabled}
       form={form}
       myref={ref}
       toggle={toggle}
       errorMsg={errorMsg}
       setErrorMsg={setErrorMsg}
       errorValues={errorValues}
-      setDisabled={setDisabled}
       setErrorValues={setErrorValues}
     />
   );
