@@ -13,6 +13,7 @@
   border: none;
   font-style: italic;
   color: var(--extras);
+  cursor: pointer;
 }
 
 .dark {

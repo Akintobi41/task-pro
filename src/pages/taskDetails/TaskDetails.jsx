@@ -1,23 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import s from "./s_TaskDetails.module.css";
 import { formDetails } from "../create/form_details";
 import { useEffect, useRef, useState } from "react";
-import { deleteOptions, postToApi } from "/src/utils/usePostToApi.js";
 import Loader from "../../components/preloader/Loader";
 import { options } from "../../utils/options";
+import { BASE_URL } from "../../utils/endpoints";
 import ConfirmDelete from "../../components/confirmDelete/ConfirmDelete";
-import { allTasks } from "../../utils/endpoints";
+import { getClass, shortenTask } from "./u_TaskDetails";
+import RenderFormInput from "./RenderFormInput";
+import useDataApiHandler from "/src/hooks/useApiDataHandler.js";
+
 const TaskDetails = ({
   toggle,
   recentlyDeleted,
   setRecentlyDeleted,
-  errorMsg,
   setErrorMsg,
 }) => {
-  const Navigate = useNavigate();
-  const el = useRef();
   const [tracker, setTracker] = useState(false);
   const [deleted, setDeleted] = useState(false);
   const { id } = useParams();
@@ -28,96 +28,86 @@ const TaskDetails = ({
     due_date: "",
     liked: "",
     notes: "",
-    start_date: "",
   });
   const ref = useRef();
   const [disabled, setDisabled] = useState();
-  const [loading, isLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [dialogue, setDialogue] = useState(false);
   const [btn, setBtn] = useState("");
-  // eslint-disable-next-line no-unused-vars
-  const [error, setError] = useState("");
+  const [update, setUpdate] = useState(false);
+  const { updateData } = useDataApiHandler(form);
+  const currentTaskUrl = `${BASE_URL}${id}`;
+
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}${id}`, options);
+
+        if (!response.ok) {
+          throw new Error(
+            "Task not available at the moment. Please try again later.",
+          );
+        }
+
+        const result = await response.json();
+        setData(result.data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(true);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    //update form data on component mount
     const handleSubmit = (e) => {
       setErrorMsg(false);
       e.preventDefault();
       //Update form details
-      const checkDate =
-        Date.parse(data["start_on"]) < Date.parse(data["due_on"]);
-      // Check if start date is greater than due date  before updating task
-      if (checkDate) {
-        setDisabled(true);
-        const formData = new FormData(e.target);
-        const formJson = Object.fromEntries(formData.entries());
-        // Merge properties from Form Json into the form object
-        setForm({ ...form, ...formJson });
-        setTracker(true);
-      } else {
-        setErrorMsg(true);
-      }
+      setDisabled(true);
+      const formData = new FormData(e.target);
+      const formJson = Object.fromEntries(formData.entries());
+      // Merge properties from Form Json into the form object
+      setForm({ ...form, ...formJson });
+      setTracker(true);
+      setUpdate(true);
     };
 
+    // Event Listener added when component has been mounted to avoid errors
     if (loading) {
       const element = ref.current;
       element.addEventListener("submit", handleSubmit);
-      return () => element.removeEventListener("submit", handleSubmit);
+
+      return () => {
+        element.removeEventListener("submit", handleSubmit);
+      };
     }
-  }, [el, form, loading]);
+  }, [form, loading]);
 
   useEffect(() => {
     // Update Task
     if (tracker) {
-      fetch(`${allTasks}${id}`, postToApi("PUT", form)).then((res) => {
-        if (!res.ok)
-          throw Error(
-            "unable to update task at the moment, please try again later",
-          );
-        Navigate("/");
-      });
+      updateData("PUT", currentTaskUrl);
     }
     setTracker(false);
-  }, [form, allTasks, id, tracker, Navigate]);
-  useEffect(() => {
-    fetch(`${allTasks}${id}`, options)
-      .then((res) => {
-        // Check if the response is OK; otherwise, throw an error
-        if (!res.ok)
-          throw Error(
-            "Task not available at the moment. Please try again later...",
-          );
-        return res.json();
-      })
-      .then((res) => {
-        isLoading(true);
-        setData(res.data);
-      })
-      .catch((error) => {
-        isLoading(null);
-        setError(error.message);
-        console.error(error.message);
-      });
-    setErrorMsg(false);
-  }, []);
+  }, [tracker]);
 
   //Delete Task
-  const handleDelete = () => {
+  function handleDelete() {
     setDialogue(true);
-  };
+  }
 
   function cancel() {
     setDialogue(false);
   }
   function confirmDelete() {
+    setDisabled(true);
     setDialogue(false);
     setDeleted(true);
-    fetch(`${allTasks}${id}`, deleteOptions).then((res) => {
-      if (!res.ok)
-        throw Error(
-          "unable to delete task at the moment, please try again later",
-        );
-      setRecentlyDeleted([...recentlyDeleted, data]);
-      Navigate("/");
-    });
+    updateData("DELETE", currentTaskUrl);
+    setRecentlyDeleted([...recentlyDeleted, data]);
   }
 
   return (
@@ -129,12 +119,7 @@ const TaskDetails = ({
       >
         <header>
           <h4>Task Progress Hub</h4>
-          {loading && (
-            <p className={s["task-gid"]}>
-              Task {id.slice(0, 4)}...
-              {id.slice(id.length - 5, id.length)}
-            </p>
-          )}
+          {loading && <p className={s["task-gid"]}>{shortenTask(id)}</p>}
         </header>
         {!loading && <Loader loading={loading} />}
 
@@ -155,97 +140,12 @@ const TaskDetails = ({
               className={`${s.form} ${dialogue ? s.blur : ""}`}
             >
               {formDetails.map((label) => (
-                <label
-                  className={`${
-                    label.type === "radio"
-                      ? s["task-name-label-radio"]
-                      : s["task-name-label"]
-                  } ${label.name === "completed" ? s.completed : ""}`}
-                  key={label.text}
-                >
-                  {" "}
-                  {label.type === "radio" ? (
-                    <>
-                      <p
-                        className={`${
-                          label.type === "radio"
-                            ? s["label-text-radio"]
-                            : s["label-text"]
-                        }`}
-                      >
-                        {label.text}
-                      </p>
-                      <section className={s["radio-inputs"]}>
-                        <label className={s["radio-label"]} name={label.name}>
-                          {" "}
-                          {label.select[0]}
-                          <input
-                            type={label.type}
-                            className={label.className}
-                            name={label.name}
-                            defaultChecked={data.completed}
-                            value={true}
-                            required
-                            disabled={disabled}
-                          />
-                        </label>{" "}
-                        <label className={s["radio-label"]}>
-                          {" "}
-                          {label.select[1]}
-                          <input
-                            type={label.type}
-                            className={label.className}
-                            name={label.name}
-                            defaultChecked={!data.completed}
-                            value={false}
-                            required
-                            disabled={disabled}
-                          />
-                        </label>
-                      </section>
-                    </>
-                  ) : label.type === "text-area" ? (
-                    <>
-                      {" "}
-                      <p className={s["label-text"]}>{label.text}:</p>
-                      <textarea
-                        name={label.name}
-                        id={label.type}
-                        className={label.className}
-                        defaultValue={data.notes}
-                        required
-                        disabled={disabled}
-                      ></textarea>
-                    </>
-                  ) : (
-                    <>
-                      <p className={s["label-text"]}> {label.text}:</p>
-                      <input
-                        type={label.type}
-                        name={label.name}
-                        className={label.className}
-                        placeholder={label.placeholder}
-                        id={label.type}
-                        defaultValue={
-                          label.name === "name"
-                            ? data.name
-                            : label.name === "due_date"
-                            ? data["due_on"]
-                            : data["start_on"]
-                        }
-                        autoComplete="on"
-                        required={label.type !== "date" ? true : false}
-                        disabled={disabled}
-                      />
-                      {label.name === "start_date" && errorMsg ? (
-                        <p className={s["date-error"]}>
-                          Start date cannot be after the due date.
-                        </p>
-                      ) : (
-                        ""
-                      )}
-                    </>
-                  )}
+                <label className={getClass(label)} key={label.text}>
+                  <RenderFormInput
+                    data={data}
+                    disabled={disabled}
+                    label={label}
+                  />
                 </label>
               ))}
               <section className={s["button-section"]}>
@@ -257,7 +157,7 @@ const TaskDetails = ({
                   disabled={disabled}
                   value="update"
                 >
-                  {disabled ? "Updating Task..." : "Update Task"}
+                  {update ? "Updating Task..." : "Update Task"}
                 </button>{" "}
               </section>
             </form>

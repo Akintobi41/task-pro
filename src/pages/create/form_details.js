@@ -14,12 +14,6 @@ export const formDetails = [
     className: s["text-area"],
   },
   {
-    text: "Start date",
-    type: "date",
-    name: "start_date",
-    className: `${s.input}`,
-  },
-  {
     text: "Due date",
     type: "date",
     name: "due_date",

@@ -2,13 +2,12 @@ import { useState } from "react";
 
 const useForm = () => {
   const [form, setForm] = useState({
-      name: "",
-      completed: "",
-      due_date: "",
-      liked: "",
-      notes: "",
-      start_date: "",
-    }),
+    name: "",
+    completed: "",
+    due_date: "",
+    liked: "",
+    notes: "",
+  }),
     handleChange = (e) => {
       setForm({
         ...form,

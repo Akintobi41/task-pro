@@ -12,9 +12,19 @@ const ChangeView = ({ grid, setGrid, toggle }) => {
           onClick={() => setGrid(item.value)}
         >
           {toggle ? (
-            <img src={item.src1} alt={item.alt1} className={item.className1} />
+            <img
+              src={item.src1}
+              alt={item.alt1}
+              className={item.className1}
+              loading="lazy"
+            />
           ) : (
-            <img src={item.src2} alt={item.alt2} className={item.className2} />
+            <img
+              src={item.src2}
+              alt={item.alt2}
+              className={item.className2}
+              loading="lazy"
+            />
           )}
         </section>
       ))}
