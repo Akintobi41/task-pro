@@ -24,6 +24,5 @@ body {
   height: 100%;
   font-family: "General Sans", sans-serif;
   background-color: var(--bg-col-2);
-  max-width: 1500px;
   margin: auto;
 }
